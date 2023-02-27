@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">DiStory</string>
+
+    <string name="title_add_story_">Add Story</string>
+    <string name="title_story_details">Story Details</string>
+
+    <string name="hint_name">Enter your name</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="hint_password">Enter your password</string>
+
+    <string name="label_invalid_password">Password must be longer than 8 characters!</string>
+    <string name="label_invalid_email">Incorrect email!</string>
+    <string name="label_invalid_name">Name must be longer than 3 characters</string>
+
+    <string name="login">Login</string>
+    <string name="login_failure">Login failed!</string>
+    <string name="signup">Signup</string>
+    <string name="register_failure">Account signup failed!</string>
+    <string name="created_account">Successfully registered an account</string>
+    <string name="input_data_invalid">Invalid input data!</string>
+
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="upload">Upload</string>
+    <string name="description">Description</string>
+    <string name="logout">Logout</string>
+    <string name="or">or</string>
+
+    <string name="create_story">Create Story</string>
+    <string name="add_story_uploaded">Story uploaded successfully</string>
+    <string name="add_story_empty_image">Image cannot be empty!</string>
+    <string name="add_story_empty_description">Description cannot be empty!</string>
+    <string name="language">Language</string>
+    <string name="retry">Retry</string>
+    <string name="show_my_location">Show my location</string>
+
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
+    <string name="normal" translatable="false">Normal</string>
+    <string name="satellite" translatable="false">Satellite</string>
+    <string name="terrain" translatable="false">Terrain</string>
+    <string name="hybrid" translatable="false">Hybrid</string>
+    <string name="google_maps" translatable="false">Google Maps</string>
+</resources>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.login.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher_distory_foreground" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/labelLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/login"
+            android:textColor="@color/textColor"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+
+        <me.syahdilla.putra.sholeh.storyappdicoding.ui.customview.EditableTextView
+            android:id="@+id/ed_login_email"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:nextFocusRight="@id/ed_login_password"
+            android:nextFocusDown="@id/ed_login_password"
+            app:textType="EMAIL" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/labelInvalidEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/label_invalid_email"
+            android:textColor="@color/red"
+            android:textSize="11sp"
+            android:visibility="invisible" />
+
+        <me.syahdilla.putra.sholeh.storyappdicoding.ui.customview.EditableTextView
+            android:id="@+id/ed_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:nextFocusLeft="@id/ed_login_email"
+            android:nextFocusUp="@id/ed_login_email"
+            android:nextFocusDown="@id/btnLogin"
+            app:textType="PASSWORD" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/labelInvalidPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/label_invalid_password"
+            android:textColor="@color/red"
+            android:textSize="11sp"
+            android:visibility="invisible" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="40dp"
+            android:nextFocusUp="@id/ed_login_password"
+            android:text="@string/login"
+            app:cornerRadius="12dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/labelOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/or"
+            android:textSize="14sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignup"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="10dp"
+            android:nextFocusUp="@id/ed_login_password"
+            android:text="@string/signup"
+            android:textColor="@color/colorPrimary"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/colorOnPrimary"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/language"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="@color/colorPrimary"
+            />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

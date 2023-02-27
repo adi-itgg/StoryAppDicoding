@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DiStory</string>
+
+    <string name="title_add_story_">Tambahkan Cerita</string>
+    <string name="title_story_details">Detail Cerita</string>
+
+    <string name="hint_name">Masukkan nama anda</string>
+    <string name="hint_email">Masukkan email anda</string>
+    <string name="hint_password">Masukkan kata sandi anda</string>
+
+    <string name="label_invalid_password">Kata sandi harus lebih dari 8 karakter!</string>
+    <string name="label_invalid_email">Email tidak benar!</string>
+    <string name="label_invalid_name">Nama harus lebih dari 3 karakter</string>
+
+    <string name="login">Masuk</string>
+    <string name="login_failure">gagal masuk akun!</string>
+    <string name="signup">Daftar</string>
+    <string name="register_failure">Daftar akun gagal!</string>
+    <string name="created_account">Berhasil mendaftarkan akun</string>
+    <string name="input_data_invalid">Data tidak diisi dengan benar!</string>
+
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="upload">Posting</string>
+    <string name="description">Deskripsi</string>
+    <string name="logout">Keluar</string>
+    <string name="or">atau</string>
+
+
+    <string name="create_story">Buat cerita</string>
+    <string name="add_story_uploaded">Cerita berhasil diunggah</string>
+    <string name="add_story_empty_image">Foto tidak boleh kosong!</string>
+    <string name="add_story_empty_description">Deskripsi tidak boleh kosong!</string>
+    <string name="language">Bahasa</string>
+    <string name="retry">Coba lagi</string>
+    <string name="show_my_location">Tampilkan lokasi saya</string>
+</resources>
