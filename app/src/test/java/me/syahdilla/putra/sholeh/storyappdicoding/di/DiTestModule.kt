@@ -1,13 +1,14 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.di
 
 import me.syahdilla.putra.sholeh.storyappdicoding.CustomLogger
+import me.syahdilla.putra.sholeh.storyappdicoding.core.di.coreModule
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 
 val testModules by lazy {
     listOf(
-        *diModules.toTypedArray(),
+        coreModule,
         singletons
     )
 }

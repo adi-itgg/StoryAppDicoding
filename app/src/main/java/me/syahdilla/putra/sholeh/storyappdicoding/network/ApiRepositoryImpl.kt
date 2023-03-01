@@ -15,9 +15,11 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.koin.core.annotation.Single
 import retrofit2.Call
 import java.io.File
 
+@Single
 class ApiRepositoryImpl(
     private val retrofitManager: RetrofitManager
 ): ApiRepository {

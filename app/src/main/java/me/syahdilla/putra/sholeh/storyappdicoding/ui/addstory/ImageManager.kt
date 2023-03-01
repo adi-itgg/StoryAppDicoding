@@ -18,9 +18,11 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import me.syahdilla.putra.sholeh.storyappdicoding.customLogger
 import me.syahdilla.putra.sholeh.storyappdicoding.sdfDisplayer
+import org.koin.core.annotation.Single
 import java.io.File
 import java.util.*
 
+@Single
 class ImageManager(
     private val context: Context
 ) {

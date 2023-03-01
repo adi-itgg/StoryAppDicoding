@@ -11,7 +11,9 @@ import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.LoginEvent
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.asJson
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.asObject
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeRunOnce
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class LoginViewModel(
     private val apiRepository: ApiRepository,
     application: Application
@@ -23,7 +25,7 @@ class LoginViewModel(
     val state = _state.asStateFlow()
 
     private val context: Context
-        get() = getApplication<App>().applicationContext
+        get() = getApplication<me.syahdilla.putra.sholeh.storyappdicoding.Application>().applicationContext
 
     fun login(email: String, password: String) = safeRunOnce(1) {
         _state.emit(LoginEvent.InProgress)

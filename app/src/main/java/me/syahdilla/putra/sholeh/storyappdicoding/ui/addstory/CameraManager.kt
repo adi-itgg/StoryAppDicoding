@@ -11,6 +11,7 @@ import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
 import me.syahdilla.putra.sholeh.storyappdicoding.customLogger
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeLaunch
+import org.koin.core.annotation.Factory
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,6 +20,7 @@ import kotlin.coroutines.resume
 /**
  * Camera manager should be inject immediately
  */
+@Factory
 class CameraManager(
     private val imageManager: ImageManager,
     private val activity: AppCompatActivity

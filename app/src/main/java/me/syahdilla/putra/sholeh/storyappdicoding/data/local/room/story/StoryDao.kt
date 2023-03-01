@@ -1,4 +1,4 @@
-package me.syahdilla.putra.sholeh.storyappdicoding.database.story
+package me.syahdilla.putra.sholeh.storyappdicoding.data.local.room.story
 
 import androidx.paging.PagingSource
 import androidx.room.Dao

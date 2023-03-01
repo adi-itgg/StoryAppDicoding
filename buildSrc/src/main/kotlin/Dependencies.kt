@@ -2,6 +2,7 @@
 
 private const val koin_version = "3.2.2"
 private const val koin_android_version = "3.3.0"
+private const val koin_ksp_version = "1.1.1"
 private const val koin_ktor= "3.2.2"
 private const val retrofit_version = "2.9.0"
 private const val retrofitJson_version = "0.8.0"
@@ -48,6 +49,7 @@ object Deps {
     // ===============================  Koin  ================================
     private const val koinCore = "io.insert-koin:koin-core:$koin_version"
     private const val koinAndroid = "io.insert-koin:koin-android:$koin_android_version"
+    private const val koinAnnotation = "io.insert-koin:koin-annotations:$koin_ksp_version"
     // ========================= Jetpack WorkManager =========================
     private const val koinWorkmanager = "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
     // ============================ Koin for Ktor ============================
@@ -76,9 +78,11 @@ object Deps {
     private const val espressoIdlingResource = "androidx.test.espresso:espresso-idling-resource:$androidEkspresso_version"
 }
 
-object Kapt {
+object KSP {
     // ========================    Room     ========================
     private const val room = "androidx.room:room-compiler:$room_version"
+    // ========================    Koin     ========================
+    private const val koin = "io.insert-koin:koin-ksp-compiler:$koin_ksp_version"
 }
 
 object DepsTest {

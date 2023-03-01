@@ -12,8 +12,10 @@ import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ItemStoryBinding
 import me.syahdilla.putra.sholeh.storyappdicoding.sdfDisplayer
 import me.syahdilla.putra.sholeh.storyappdicoding.sdfParser
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.tryRun
+import org.koin.core.annotation.Factory
 import java.util.*
 
+@Factory
 class StoryListAdapterPaging(
     diffCallback: DiffUtil.ItemCallback<Story>
 ) : PagingDataAdapter<Story, StoryListAdapterPaging.ViewHolder>(

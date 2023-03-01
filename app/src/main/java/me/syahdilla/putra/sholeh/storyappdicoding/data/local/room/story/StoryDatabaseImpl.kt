@@ -1,18 +1,18 @@
-package me.syahdilla.putra.sholeh.storyappdicoding.database.story
+package me.syahdilla.putra.sholeh.storyappdicoding.data.local.room.story
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.withTransaction
-import me.syahdilla.putra.sholeh.storyappdicoding.data.RemoteKeys
+import me.syahdilla.putra.sholeh.storyappdicoding.data.local.entity.RemoteKeysEntity
 import me.syahdilla.putra.sholeh.storyappdicoding.data.Story
-import me.syahdilla.putra.sholeh.storyappdicoding.database.remotekeys.RemoteKeysDao
+import me.syahdilla.putra.sholeh.storyappdicoding.data.local.room.remotekeys.RemoteKeysDao
 
 @Database(
-    entities = [Story::class, RemoteKeys::class],
+    entities = [Story::class, RemoteKeysEntity::class],
     version = 1,
     exportSchema = false
 )
-abstract class StoryDatabaseImpl: StoryDatabase, RoomDatabase() {
+abstract class StoryDatabaseImpl: IStoryDatabase, RoomDatabase() {
 
     abstract fun storyDao(): StoryDao
     abstract fun remoteKeysDao(): RemoteKeysDao

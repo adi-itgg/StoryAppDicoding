@@ -1,10 +1,10 @@
-package me.syahdilla.putra.sholeh.storyappdicoding.database.story
+package me.syahdilla.putra.sholeh.storyappdicoding.data.local.room.story
 
 import androidx.paging.PagingSource
 import me.syahdilla.putra.sholeh.storyappdicoding.data.Story
-import me.syahdilla.putra.sholeh.storyappdicoding.database.remotekeys.RemoteKeysDao
+import me.syahdilla.putra.sholeh.storyappdicoding.data.local.room.remotekeys.RemoteKeysDao
 
-interface StoryDatabase {
+interface IStoryDatabase {
 
     val remoteKeysDao: RemoteKeysDao
 

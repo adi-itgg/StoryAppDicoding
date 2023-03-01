@@ -9,11 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
 import me.syahdilla.putra.sholeh.storyappdicoding.customLogger
+import org.koin.core.annotation.Factory
 import kotlin.coroutines.resume
 
 /**
  * Gallery manager should be inject immediately
  */
+@Factory
 class GalleryManager(
     private val activity: AppCompatActivity
 ) {

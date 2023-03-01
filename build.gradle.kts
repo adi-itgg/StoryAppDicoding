@@ -5,7 +5,7 @@ plugins {
     id(Plugin.Library) version AndroidAppVersion apply false
     id(Plugin.Android.Kotlin) version kotlinVersion apply false
     kotlin(Plugin.Serialization) version kotlinVersion apply false
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
+    id(Plugin.GoogleMaps) version GoogleMapsVersion apply false
 }
 
 tasks.register("clean",Delete::class){

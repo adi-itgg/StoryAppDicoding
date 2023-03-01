@@ -1,26 +1,26 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.ui.addstory
 
-import android.app.Application
 import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import me.syahdilla.putra.sholeh.storyappdicoding.App
 import me.syahdilla.putra.sholeh.storyappdicoding.UserManager
 import me.syahdilla.putra.sholeh.storyappdicoding.network.ApiRepository
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeRunOnce
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.DefaultEvent
+import org.koin.android.annotation.KoinViewModel
 import java.io.File
 
+@KoinViewModel
 class AddStoryViewModel(
     private val apiRepository: ApiRepository,
     private val imageManager: ImageManager,
-    application: Application
+    application: android.app.Application
 ): AndroidViewModel(application) {
 
     val context: Context
-        get() = getApplication<App>().applicationContext
+        get() = getApplication<me.syahdilla.putra.sholeh.storyappdicoding.Application>().applicationContext
 
     lateinit var photoUri: Uri
     val isPhotoAvailable

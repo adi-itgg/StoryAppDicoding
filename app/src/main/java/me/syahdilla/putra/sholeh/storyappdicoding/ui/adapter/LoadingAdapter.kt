@@ -7,7 +7,9 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ItemLoadingBinding
+import org.koin.core.annotation.Factory
 
+@Factory
 class LoadingAdapter: LoadStateAdapter<LoadingAdapter.ViewHolder>() {
     
     var onRetryClick: () -> Unit = {}

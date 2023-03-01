@@ -7,7 +7,7 @@ enum class Type {
     DEBUG,
     TEST,
     ANDROID_TEST,
-    KAPT
+    KSP
 }
 
 fun DependencyHandler.implements(clazz: Any, type: Type = Type.IMPLEMENTATION) {
@@ -21,7 +21,7 @@ fun DependencyHandler.implements(clazz: Any, type: Type = Type.IMPLEMENTATION) {
             Type.DEBUG -> add("debugImplementation", value)
             Type.TEST -> add("testImplementation", value)
             Type.ANDROID_TEST -> add("androidTestImplementation", value)
-            Type.KAPT -> add("kapt", value)
+            Type.KSP -> add("ksp", value)
         }
     }
 }

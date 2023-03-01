@@ -10,8 +10,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import me.syahdilla.putra.sholeh.storyappdicoding.data.Story
 import me.syahdilla.putra.sholeh.storyappdicoding.data.User
-import me.syahdilla.putra.sholeh.storyappdicoding.database.story.StoryDatabase
-import me.syahdilla.putra.sholeh.storyappdicoding.database.story.StoryDatabaseImpl
+import me.syahdilla.putra.sholeh.storyappdicoding.data.local.room.story.IStoryDatabase
+import me.syahdilla.putra.sholeh.storyappdicoding.data.local.room.story.StoryDatabaseImpl
 import me.syahdilla.putra.sholeh.storyappdicoding.network.ApiRepository
 import me.syahdilla.putra.sholeh.storyappdicoding.network.StoryRemoteMediator
 import org.junit.After
@@ -24,7 +24,7 @@ import org.junit.runner.RunWith
 class StoriesRemoteMediatorTest {
 
     private var mockApi: ApiRepository = FakeApiRepository()
-    private var mockDb: StoryDatabase = Room.inMemoryDatabaseBuilder(
+    private var mockDb: IStoryDatabase = Room.inMemoryDatabaseBuilder(
         ApplicationProvider.getApplicationContext(),
         StoryDatabaseImpl::class.java
     ).allowMainThreadQueries().build()

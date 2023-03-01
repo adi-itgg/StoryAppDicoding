@@ -1,1 +1,1 @@
-const val kotlinVersion = "1.7.21"
+const val kotlinVersion = "1.8.10"

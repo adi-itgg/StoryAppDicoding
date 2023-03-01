@@ -3,8 +3,8 @@ plugins {
     id(Plugin.Android.Kotlin)
     id(Plugin.KotlinXSerialization)
     id(Plugin.Parcelize)
-    id(Plugin.Kapt)
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id(Plugin.Ksp) version(KspVersion)
+    id(Plugin.GoogleMaps)
 }
 
 android {
@@ -46,6 +46,18 @@ android {
     testOptions {
         animationsDisabled = true
     }
+
+    sourceSets.getByName("main").java.srcDir("src/main/kotlin")
+    sourceSets.getByName("test").java.srcDir("src/test/kotlin")
+    // For KSP
+    applicationVariants.configureEach {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            }
+        }
+    }
+
 }
 
 dependencies {
@@ -53,6 +65,6 @@ dependencies {
     implements(Deps)
     implements(DepsTest, Type.TEST)
     implements(DepsAndroidTest, Type.ANDROID_TEST)
-    implements(Kapt, Type.KAPT)
+    implements(KSP, Type.KSP)
 
 }

@@ -1,22 +1,22 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.ui.signup
 
-import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import me.syahdilla.putra.sholeh.storyappdicoding.App
 import me.syahdilla.putra.sholeh.storyappdicoding.R
 import me.syahdilla.putra.sholeh.storyappdicoding.network.ApiRepository
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.DefaultEvent
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeRunOnce
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class SignupViewModel(
     private val apiRepository: ApiRepository,
-    application: Application
+    application: android.app.Application
 ): AndroidViewModel(application) {
 
     private val context
-        get() = getApplication<App>().applicationContext
+        get() = getApplication<me.syahdilla.putra.sholeh.storyappdicoding.Application>().applicationContext
 
     private val _state = MutableStateFlow<DefaultEvent>(DefaultEvent.Nothing)
     val state = _state.asStateFlow()

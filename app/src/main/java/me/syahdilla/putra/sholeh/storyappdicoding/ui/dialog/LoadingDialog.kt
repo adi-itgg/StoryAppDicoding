@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import me.syahdilla.putra.sholeh.storyappdicoding.databinding.DialogLoadingBinding
+import org.koin.core.annotation.Factory
 
+@Factory
 class LoadingDialog: DialogFragment() {
 
     override fun onCreateView(
