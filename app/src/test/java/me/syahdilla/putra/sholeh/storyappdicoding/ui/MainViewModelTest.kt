@@ -8,11 +8,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
+import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.StoryPaging
+import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.model.Story
 import me.syahdilla.putra.sholeh.storyappdicoding.data.DataDummy
-import me.syahdilla.putra.sholeh.storyappdicoding.data.Story
 import me.syahdilla.putra.sholeh.storyappdicoding.fake.FakeStoryPaging
-import me.syahdilla.putra.sholeh.storyappdicoding.network.StoryPaging
-import me.syahdilla.putra.sholeh.storyappdicoding.ui.main.MainViewModel
+import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.main.MainViewModel
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.KoinTesting
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.MainDispatcherRule
 import org.junit.Rule

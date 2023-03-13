@@ -1,6 +1,6 @@
 package me.syahdilla.putra.sholeh.storyappdicoding
 
-import me.syahdilla.putra.sholeh.storyappdicoding.data.User
+import me.syahdilla.putra.sholeh.storyappdicoding.core.data.User
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -5,10 +5,10 @@ package me.syahdilla.putra.sholeh.storyappdicoding
 import androidx.paging.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import me.syahdilla.putra.sholeh.storyappdicoding.data.User
-import me.syahdilla.putra.sholeh.storyappdicoding.network.ApiRepository
+import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.repository.StoryRepository
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.KoinTesting
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.asJson
+import me.syahdilla.putra.sholeh.storyappdicoding.utils.customLogger
 import org.koin.test.inject
 import java.io.File
 import kotlin.random.Random
@@ -20,9 +20,9 @@ class ApiTest: KoinTesting {
 
     private val logger by customLogger()
 
-    private val repository: ApiRepository by inject()
+    private val repository: StoryRepository by inject()
     private val userTestSession by lazy {
-        User(
+        me.syahdilla.putra.sholeh.storyappdicoding.core.data.User(
             name = "User Test 1",
             token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLXZIRHFMMFVqeDVyUE5OVTgiLCJpYXQiOjE2NzMyNjk3NjB9.GwU3zTkK6ztHULhw26fIykAq2Ij6n0Hgo081aRV-zBo",
             userId = "user-vHDqL0Ujx5rPNNU8"

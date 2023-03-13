@@ -13,8 +13,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import me.syahdilla.putra.sholeh.storyappdicoding.*
-import me.syahdilla.putra.sholeh.storyappdicoding.ui.login.LoginActivity
-import me.syahdilla.putra.sholeh.storyappdicoding.ui.main.MainActivity
+import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.login.LoginActivity
+import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.main.MainActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.UIIdlingResourceTest
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.waitUntil
 import org.junit.Assert.*

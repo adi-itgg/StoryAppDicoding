@@ -1,7 +1,6 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.utils
 
 import androidx.test.espresso.idling.CountingIdlingResource
-import me.syahdilla.putra.sholeh.storyappdicoding.BuildConfig
 
 object EspressoIdlingResource {
 

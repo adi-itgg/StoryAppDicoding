@@ -8,12 +8,11 @@ import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import me.syahdilla.putra.sholeh.storyappdicoding.data.Story
-import me.syahdilla.putra.sholeh.storyappdicoding.data.User
-import me.syahdilla.putra.sholeh.storyappdicoding.data.local.room.story.IStoryDatabase
-import me.syahdilla.putra.sholeh.storyappdicoding.data.local.room.story.StoryDatabaseImpl
-import me.syahdilla.putra.sholeh.storyappdicoding.network.ApiRepository
-import me.syahdilla.putra.sholeh.storyappdicoding.network.StoryRemoteMediator
+import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.entity.StoryEntity
+import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.room.story.StoryDatabase
+import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.room.story.StoryDatabaseImpl
+import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.StoryRemoteMediator
+import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.repository.StoryRepository
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,8 +22,9 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class StoriesRemoteMediatorTest {
 
-    private var mockApi: ApiRepository = FakeApiRepository()
-    private var mockDb: IStoryDatabase = Room.inMemoryDatabaseBuilder(
+    private var mockApi: StoryRepository =
+        FakeStoryRepository()
+    private var mockDb: StoryDatabase = Room.inMemoryDatabaseBuilder(
         ApplicationProvider.getApplicationContext(),
         StoryDatabaseImpl::class.java
     ).allowMainThreadQueries().build()
@@ -35,8 +35,9 @@ class StoriesRemoteMediatorTest {
             mockApi,
             mockDb,
         )
-        remoteMediator.user = User("Test", "Test123", "123")
-        val pagingState = PagingState<Int, Story>(
+        remoteMediator.user =
+            me.syahdilla.putra.sholeh.storyappdicoding.core.data.User("Test", "Test123", "123")
+        val pagingState = PagingState<Int, StoryEntity>(
             emptyList(),
             null,
             PagingConfig(10),

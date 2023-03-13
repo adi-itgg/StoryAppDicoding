@@ -1,6 +1,6 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.di
 
-import me.syahdilla.putra.sholeh.storyappdicoding.CustomLogger
+import me.syahdilla.putra.sholeh.storyappdicoding.utils.CustomLogger
 import me.syahdilla.putra.sholeh.storyappdicoding.core.di.coreModule
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

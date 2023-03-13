@@ -1,7 +1,6 @@
-package me.syahdilla.putra.sholeh.storyappdicoding
+package me.syahdilla.putra.sholeh.storyappdicoding.utils
 
 import android.util.Log
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.tryRun
 import kotlin.reflect.KClass
 
 class CustomLogger(
