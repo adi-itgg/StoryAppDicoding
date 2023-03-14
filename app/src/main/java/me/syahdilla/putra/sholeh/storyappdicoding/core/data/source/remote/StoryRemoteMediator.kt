@@ -5,15 +5,14 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import me.syahdilla.putra.sholeh.storyappdicoding.UserManager
 import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.entity.RemoteKeysEntity
 import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.entity.StoryEntity
 import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.room.story.StoryDatabase
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.repository.StoryRepository
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.customLogger
 import me.syahdilla.putra.sholeh.storyappdicoding.isUITest
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.DataMapper
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.EspressoIdlingResource
+import me.syahdilla.putra.sholeh.storyappdicoding.utils.*
 import org.koin.core.annotation.Factory
 
 private const val INITIAL_PAGE = 1
@@ -21,7 +20,7 @@ private const val INITIAL_PAGE = 1
 @Factory([StoryRemoteMediator::class])
 @OptIn(ExperimentalPagingApi::class)
 class StoryRemoteMediator(
-    private val storyRepository: StoryRepository,
+    private val retrofitManager: RetrofitManager,
     private val storyDatabase: StoryDatabase
 ) : RemoteMediator<Int, StoryEntity>() {
 
@@ -51,12 +50,18 @@ class StoryRemoteMediator(
 
         if (pageOrResult is Int) {
             logger.debug { "request new load page $pageOrResult" }
-            val response = storyRepository.getStories(
-                user = user ?: UserManager.session,
-                withLocation = false,
-                page = pageOrResult,
-                size = state.config.pageSize
-            ).getOrThrow()
+            val response = withContext(Dispatchers.IO) {
+                tryRun(noLogs = false) {
+                    val res = retrofitManager.api.getAllStories(
+                        token = "Bearer ${(user ?: UserManager.session).token}",
+                        //withLocation = false,
+                        page = pageOrResult,
+                        size = state.config.pageSize
+                    ).execute()
+                    logger.debug("HTTP Response: ${res.code()}", res.message())
+                    res.body() ?: res.errorBody()?.string()?.asObject() ?: throw NullPointerException("Body is null!")
+                }
+            }.getOrThrow()
 
             if (response.error) throw IllegalStateException("response is error true!")
 

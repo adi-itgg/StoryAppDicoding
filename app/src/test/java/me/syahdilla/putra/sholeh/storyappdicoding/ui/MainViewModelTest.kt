@@ -2,17 +2,17 @@ package me.syahdilla.putra.sholeh.storyappdicoding.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.AsyncPagingDataDiffer
+import androidx.paging.map
 import androidx.recyclerview.widget.ListUpdateCallback
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.StoryPaging
 import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.model.Story
 import me.syahdilla.putra.sholeh.storyappdicoding.data.DataDummy
-import me.syahdilla.putra.sholeh.storyappdicoding.fake.FakeStoryPaging
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.main.MainViewModel
+import me.syahdilla.putra.sholeh.storyappdicoding.utils.DataMapper
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.KoinTesting
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.MainDispatcherRule
 import org.junit.Rule
@@ -22,7 +22,6 @@ import org.koin.core.component.inject
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.module.Module
-import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import kotlin.test.assertEquals
@@ -49,7 +48,6 @@ class MainViewModelTest: KoinTesting {
                 override fun onChanged(position: Int, count: Int, payload: Any?) {}
             }
         } bind ListUpdateCallback::class
-        factoryOf(::FakeStoryPaging) bind StoryPaging::class
     }
 
     override fun dispose() {
@@ -63,7 +61,7 @@ class MainViewModelTest: KoinTesting {
         loadKoinModules(dummyListModule)
         val mainViewModel: MainViewModel by inject()
         val stories: List<Story> by inject()
-        val actualStories = mainViewModel.getStoriesMediator().first()
+        val actualStories = mainViewModel.getStoriesMediator().first().map { DataMapper.mapEntityToDomain(it) }
         val differ = AsyncPagingDataDiffer<Story>(get(), get(), get())
         differ.submitData(actualStories)
 
@@ -75,7 +73,7 @@ class MainViewModelTest: KoinTesting {
     @Test
     fun `when Get Stories Empty Should Return No Data`() = runTest {
         val mainViewModel: MainViewModel by inject()
-        val actualStories = mainViewModel.getStoriesMediator().first()
+        val actualStories = mainViewModel.getStoriesMediator().first().map { DataMapper.mapEntityToDomain(it) }
         val differ = AsyncPagingDataDiffer<Story>(get(), get(), get())
         differ.submitData(actualStories)
 

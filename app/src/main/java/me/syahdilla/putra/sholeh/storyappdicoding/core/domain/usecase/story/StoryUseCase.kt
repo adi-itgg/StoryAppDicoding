@@ -11,10 +11,10 @@ import java.io.File
 
 interface StoryUseCase {
 
-    fun getStoriesMediatorFlow(): Flow<PagingData<StoryEntity>>
-
     suspend fun createStory(token: String, description: String, photo: File, lat: Float?, lon: Float?): Result<ApiBasicResponse>
 
     suspend fun createStory(imageManager: ImageManager, token: String, description: String, photo: Uri, lat: Float?, lon: Float?): Result<ApiBasicResponse>?
+
+    fun getStoriesMediator(): Flow<PagingData<StoryEntity>>
 
 }

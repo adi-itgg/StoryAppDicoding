@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.flowWithLifecycle
+import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.delay
 import me.syahdilla.putra.sholeh.storyappdicoding.PREF_USER_SESSION
@@ -20,6 +21,7 @@ import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.addstory.AddStoryA
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.login.LoginActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.maps.MapsActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.storydetails.StoryDetailsActivity
+import me.syahdilla.putra.sholeh.storyappdicoding.utils.DataMapper
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeLaunch
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeRunOnce
 import org.koin.android.ext.android.inject
@@ -64,8 +66,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
 
         safeLaunch {
-            viewModel.getStoriesMediator().flowWithLifecycle(lifecycle).collect {
-                adapterPaging.submitData(it)
+            viewModel.getStoriesMediator().flowWithLifecycle(lifecycle).collect { pagingData ->
+                adapterPaging.submitData(pagingData.map { entity -> DataMapper.mapEntityToDomain(entity) })
                 if (!hasCreatedNewStory) return@collect
                 safeRunOnce(id = 90, cancelAndWait = true) {
                     delay(1_000)

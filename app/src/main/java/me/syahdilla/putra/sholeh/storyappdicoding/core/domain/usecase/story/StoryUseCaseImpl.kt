@@ -13,8 +13,6 @@ internal class StoryUseCaseImpl(
     private val repository: StoryRepository
 ): StoryUseCase {
 
-    override fun getStoriesMediatorFlow() = repository.getStoriesMediatorFlow()
-
     override suspend fun createStory(
         token: String,
         description: String,
@@ -31,5 +29,7 @@ internal class StoryUseCaseImpl(
         lat: Float?,
         lon: Float?
     ): Result<ApiBasicResponse>? = repository.createStory(imageManager, token, description, photo, lat, lon)
+
+    override fun getStoriesMediator() = repository.getStoriesMediator()
 
 }

@@ -29,5 +29,6 @@ interface StoryRepository {
 
     suspend fun createStory(imageManager: ImageManager, token: String, description: String, photo: Uri, lat: Float?, lon: Float?): Result<ApiBasicResponse>?
 
-    fun getStoriesMediatorFlow(): Flow<PagingData<StoryEntity>>
+    fun getStoriesMediator(): Flow<PagingData<StoryEntity>>
+
 }

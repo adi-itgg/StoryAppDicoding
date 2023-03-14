@@ -1,15 +1,19 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.core.data
 
 import android.net.Uri
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
+import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.room.story.StoryDatabase
 import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.RetrofitManager
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.StoryPaging
+import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.StoryRemoteMediator
 import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.response.ApiBasicResponse
 import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.repository.StoryRepository
+import me.syahdilla.putra.sholeh.storyappdicoding.utils.asObject
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.customLogger
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.image.ImageManager
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.asObject
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.tryRun
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.wrapEspressoIdlingResource
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -23,7 +27,8 @@ import java.io.File
 @Single
 class StoryRepositoryImpl(
     private val retrofitManager: RetrofitManager,
-    private val storyPaging: StoryPaging
+    private val mediator: StoryRemoteMediator,
+    private val database: StoryDatabase
 ): StoryRepository {
 
     private val logger by customLogger()
@@ -68,6 +73,11 @@ class StoryRepositoryImpl(
         createStory(token, description, file, lat, lon)
     }
 
-    override fun getStoriesMediatorFlow() = storyPaging.getStoriesMediatorFlow()
+    @OptIn(ExperimentalPagingApi::class)
+    override fun getStoriesMediator() = Pager(
+        config = PagingConfig(pageSize = 10),
+        remoteMediator = mediator,
+        pagingSourceFactory = { database.getAllStories() }
+    ).flow
 
 }
