@@ -11,13 +11,13 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import me.syahdilla.putra.sholeh.storyappdicoding.R
 import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ActivitySignupBinding
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeLaunch
+import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.dialog.LoadingDialog
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.DefaultEvent
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.EspressoIdlingResource
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.animateFade
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.animateInfinite
+import me.syahdilla.putra.sholeh.story.core.utils.EspressoIdlingResource
+import me.syahdilla.putra.sholeh.story.core.utils.animateFade
+import me.syahdilla.putra.sholeh.story.core.utils.animateInfinite
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

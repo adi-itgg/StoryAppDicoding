@@ -23,7 +23,7 @@ abstract class UIIdlingResourceTest<T: AppCompatActivity>(
 
     @Before
     fun setup() {
-        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+        IdlingRegistry.getInstance().register(me.syahdilla.putra.sholeh.story.core.utils.EspressoIdlingResource.countingIdlingResource)
         onSetup()
     }
 
@@ -31,7 +31,7 @@ abstract class UIIdlingResourceTest<T: AppCompatActivity>(
 
     @After
     fun onDone() {
-        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+        IdlingRegistry.getInstance().unregister(me.syahdilla.putra.sholeh.story.core.utils.EspressoIdlingResource.countingIdlingResource)
     }
 
 }

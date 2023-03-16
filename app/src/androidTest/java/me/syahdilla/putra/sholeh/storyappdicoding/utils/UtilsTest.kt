@@ -1,6 +1,7 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.utils
 
 import kotlinx.coroutines.delay
+import me.syahdilla.putra.sholeh.story.core.utils.tryRun
 
 suspend fun waitUntil(action: () -> Unit) {
     val start = System.currentTimeMillis()

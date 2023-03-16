@@ -8,12 +8,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import me.syahdilla.putra.sholeh.storyappdicoding.*
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.usecase.user.UserUseCase
+import me.syahdilla.putra.sholeh.story.core.domain.usecase.user.UserUseCase
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.LoginEvent
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.asJson
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.asObject
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.customLogger
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeRunOnce
+import me.syahdilla.putra.sholeh.story.core.utils.asJson
+import me.syahdilla.putra.sholeh.story.core.utils.asObject
+import me.syahdilla.putra.sholeh.story.core.utils.customLogger
+import me.syahdilla.putra.sholeh.story.core.utils.safeRunOnce
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel

@@ -12,18 +12,17 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.flowWithLifecycle
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import me.syahdilla.putra.sholeh.storyappdicoding.UserManager
+import me.syahdilla.putra.sholeh.story.core.UserManager
+import me.syahdilla.putra.sholeh.story.core.utils.*
 import me.syahdilla.putra.sholeh.storyappdicoding.R
 import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ActivityLoginBinding
-import me.syahdilla.putra.sholeh.storyappdicoding.isUITest
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
-import me.syahdilla.putra.sholeh.storyappdicoding.ui.dialog.LoadingDialog
-import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.LoginEvent
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.main.MainActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.signup.EMAIL_REGISTER_RESULT
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.signup.PASSWORD_REGISTER_RESULT
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.signup.SignupActivity
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.*
+import me.syahdilla.putra.sholeh.storyappdicoding.ui.dialog.LoadingDialog
+import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.LoginEvent
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -126,7 +125,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     private fun animateViews() = with(binding) {
 
         root.animateChildViews {
-            animateTogether(it.animateSlide(), it.animateFade())
+            animateTogether(
+                it.animateSlide(),
+                it.animateFade()
+            )
         }.playSequentially()
 
         banner.animateInfinite(lifecycle)

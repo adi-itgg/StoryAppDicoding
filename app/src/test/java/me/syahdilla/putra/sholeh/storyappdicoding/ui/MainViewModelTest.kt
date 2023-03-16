@@ -9,10 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.model.Story
+import me.syahdilla.putra.sholeh.story.core.domain.model.Story
 import me.syahdilla.putra.sholeh.storyappdicoding.data.DataDummy
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.main.MainViewModel
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.DataMapper
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.KoinTesting
 import me.syahdilla.putra.sholeh.storyappdicoding.utils.MainDispatcherRule
 import org.junit.Rule
@@ -61,7 +60,7 @@ class MainViewModelTest: KoinTesting {
         loadKoinModules(dummyListModule)
         val mainViewModel: MainViewModel by inject()
         val stories: List<Story> by inject()
-        val actualStories = mainViewModel.getStoriesMediator().first().map { DataMapper.mapEntityToDomain(it) }
+        val actualStories = mainViewModel.getStoriesMediator().first().map { me.syahdilla.putra.sholeh.story.core.utils.DataMapper.mapEntityToDomain(it) }
         val differ = AsyncPagingDataDiffer<Story>(get(), get(), get())
         differ.submitData(actualStories)
 
@@ -73,7 +72,7 @@ class MainViewModelTest: KoinTesting {
     @Test
     fun `when Get Stories Empty Should Return No Data`() = runTest {
         val mainViewModel: MainViewModel by inject()
-        val actualStories = mainViewModel.getStoriesMediator().first().map { DataMapper.mapEntityToDomain(it) }
+        val actualStories = mainViewModel.getStoriesMediator().first().map { me.syahdilla.putra.sholeh.story.core.utils.DataMapper.mapEntityToDomain(it) }
         val differ = AsyncPagingDataDiffer<Story>(get(), get(), get())
         differ.submitData(actualStories)
 

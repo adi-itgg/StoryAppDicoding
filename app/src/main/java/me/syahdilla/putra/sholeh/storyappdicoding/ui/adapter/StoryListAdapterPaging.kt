@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import me.syahdilla.putra.sholeh.storyappdicoding.R
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.model.Story
+import me.syahdilla.putra.sholeh.story.core.domain.model.Story
 import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ItemStoryBinding
-import me.syahdilla.putra.sholeh.storyappdicoding.sdfDisplayer
-import me.syahdilla.putra.sholeh.storyappdicoding.sdfParser
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.tryRun
+import me.syahdilla.putra.sholeh.story.core.sdfDisplayer
+import me.syahdilla.putra.sholeh.story.core.sdfParser
+import me.syahdilla.putra.sholeh.story.core.utils.tryRun
 import java.util.*
 
 class StoryListAdapterPaging(

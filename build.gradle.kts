@@ -6,6 +6,7 @@ plugins {
     id(Plugin.Android.Kotlin) version kotlinVersion apply false
     kotlin(Plugin.Serialization) version kotlinVersion apply false
     id(Plugin.GoogleMaps) version GoogleMapsVersion apply false
+    id("com.android.dynamic-feature") version "7.3.1" apply false
 }
 
 tasks.register("clean",Delete::class){

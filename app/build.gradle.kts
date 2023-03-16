@@ -20,11 +20,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField(
-            type = "String",
-            name = "BASE_API_URL",
-            value = "\"https://story-api.dicoding.dev/v1/\""
-        )
     }
 
     buildTypes {
@@ -49,6 +44,7 @@ android {
 
     sourceSets.getByName("main").java.srcDir("src/main/kotlin")
     sourceSets.getByName("test").java.srcDir("src/test/kotlin")
+    dynamicFeatures += setOf(":favorit")
     // For KSP
     applicationVariants.configureEach {
         kotlin.sourceSets {
@@ -62,6 +58,7 @@ android {
 
 dependencies {
 
+    implementation(project(":core"))
     implements(Deps)
     implements(DepsTest, Type.TEST)
     implements(DepsAndroidTest, Type.ANDROID_TEST)

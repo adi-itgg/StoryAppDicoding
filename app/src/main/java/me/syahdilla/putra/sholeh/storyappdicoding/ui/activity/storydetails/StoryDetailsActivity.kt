@@ -2,12 +2,13 @@ package me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.storydetails
 
 import android.os.Bundle
 import coil.load
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import me.syahdilla.putra.sholeh.storyappdicoding.R
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.model.Story
+import me.syahdilla.putra.sholeh.story.core.domain.model.Story
 import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ActivityStoryDetailsBinding
-import me.syahdilla.putra.sholeh.storyappdicoding.sdfDisplayer
-import me.syahdilla.putra.sholeh.storyappdicoding.sdfParser
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.tryRun
+import me.syahdilla.putra.sholeh.story.core.sdfDisplayer
+import me.syahdilla.putra.sholeh.story.core.sdfParser
+import me.syahdilla.putra.sholeh.story.core.utils.tryRun
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
 import java.util.*
 
@@ -32,6 +33,14 @@ class StoryDetailsActivity: BaseActivity<ActivityStoryDetailsBinding>(ActivitySt
         }.onFailure {
             logger.error("failure load image correctly!")
         }
+
+        val splitInstallManager = SplitInstallManagerFactory.create(mThis)
+        val module = "favorite"
+        if (splitInstallManager.installedModules.contains(module)) {
+
+        }
+
+
         Unit
     }
 

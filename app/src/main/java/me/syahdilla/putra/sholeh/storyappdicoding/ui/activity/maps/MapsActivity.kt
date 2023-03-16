@@ -14,15 +14,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import io.ktor.http.parsing.*
+import me.syahdilla.putra.sholeh.story.core.UserManager
+import me.syahdilla.putra.sholeh.story.core.domain.model.Story
+import me.syahdilla.putra.sholeh.story.core.domain.repository.StoryRepository
+import me.syahdilla.putra.sholeh.story.core.utils.customLogger
+import me.syahdilla.putra.sholeh.story.core.utils.image.ImageManager
+import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
+import me.syahdilla.putra.sholeh.story.core.utils.tryRun
 import me.syahdilla.putra.sholeh.storyappdicoding.R
-import me.syahdilla.putra.sholeh.storyappdicoding.UserManager
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.model.Story
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.customLogger
 import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ActivityMapsBinding
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.repository.StoryRepository
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.image.ImageManager
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeLaunch
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.tryRun
 import org.koin.android.ext.android.inject
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -69,7 +69,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         tryRun {
-            val isSuccess = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_styled_aubergine))
+            val isSuccess = googleMap.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(
+                    this,
+                    R.raw.map_styled_aubergine
+                )
+            )
             if (!isSuccess) throw ParseException("failure parse map json!")
         }.onFailure {
             logger.error { "failure parse map style!" }

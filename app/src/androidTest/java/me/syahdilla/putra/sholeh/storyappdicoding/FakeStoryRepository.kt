@@ -4,14 +4,14 @@ import android.net.Uri
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.entity.StoryEntity
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.response.ApiBasicResponse
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.response.StoriesResponse
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.response.StoryResponse
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.response.UserResponse
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.model.Story
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.repository.StoryRepository
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.image.ImageManager
+import me.syahdilla.putra.sholeh.story.core.data.source.local.entity.StoryEntity
+import me.syahdilla.putra.sholeh.story.core.data.source.remote.response.ApiBasicResponse
+import me.syahdilla.putra.sholeh.story.core.data.source.remote.response.StoriesResponse
+import me.syahdilla.putra.sholeh.story.core.data.source.remote.response.StoryResponse
+import me.syahdilla.putra.sholeh.story.core.data.source.remote.response.UserResponse
+import me.syahdilla.putra.sholeh.story.core.domain.model.Story
+import me.syahdilla.putra.sholeh.story.core.domain.repository.StoryRepository
+import me.syahdilla.putra.sholeh.story.core.utils.image.ImageManager
 import java.io.File
 
 class FakeStoryRepository: StoryRepository {
@@ -65,7 +65,7 @@ class FakeStoryRepository: StoryRepository {
         lon: Float?
     ): Result<ApiBasicResponse>? = null
 
-    override fun getStoriesMediatorFlow(): Flow<PagingData<StoryEntity>> = flowOf()
+    override fun getStoriesMediator(): Flow<PagingData<StoryEntity>> = flowOf()
 
 
 }

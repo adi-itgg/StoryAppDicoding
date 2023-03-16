@@ -5,12 +5,12 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import me.syahdilla.putra.sholeh.story.core.utils.safeRunOnce
 import me.syahdilla.putra.sholeh.storyappdicoding.App
-import me.syahdilla.putra.sholeh.storyappdicoding.UserManager
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.usecase.story.StoryUseCase
+import me.syahdilla.putra.sholeh.story.core.UserManager
+import me.syahdilla.putra.sholeh.story.core.domain.usecase.story.StoryUseCase
+import me.syahdilla.putra.sholeh.story.core.utils.image.ImageManager
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.DefaultEvent
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.image.ImageManager
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeRunOnce
 import org.koin.android.annotation.KoinViewModel
 import java.io.File
 

@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.Dispatchers.Main
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.customLogger
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.safeLaunch
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.viewBinding
+import me.syahdilla.putra.sholeh.story.core.utils.customLogger
+import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
+import me.syahdilla.putra.sholeh.story.core.utils.viewBinding
 import kotlin.reflect.KClass
 
 abstract class BaseActivity<out T: ViewBinding>(

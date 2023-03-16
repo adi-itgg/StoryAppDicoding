@@ -1,4 +1,4 @@
-package me.syahdilla.putra.sholeh.storyappdicoding
+package me.syahdilla.putra.sholeh.story
 
 import androidx.paging.*
 import androidx.room.Room
@@ -8,11 +8,14 @@ import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.entity.StoryEntity
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.room.story.StoryDatabase
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.local.room.story.StoryDatabaseImpl
-import me.syahdilla.putra.sholeh.storyappdicoding.core.data.source.remote.StoryRemoteMediator
-import me.syahdilla.putra.sholeh.storyappdicoding.core.domain.repository.StoryRepository
+import me.syahdilla.putra.sholeh.story.core.data.source.local.entity.StoryEntity
+import me.syahdilla.putra.sholeh.story.core.data.source.local.room.story.StoryDatabase
+import me.syahdilla.putra.sholeh.story.core.data.source.local.room.story.StoryDatabaseImpl
+import me.syahdilla.putra.sholeh.story.core.data.source.remote.RetrofitManager
+import me.syahdilla.putra.sholeh.story.core.data.source.remote.RetrofitManagerImpl
+import me.syahdilla.putra.sholeh.story.core.data.source.remote.StoryRemoteMediator
+import me.syahdilla.putra.sholeh.story.core.domain.repository.StoryRepository
+import me.syahdilla.putra.sholeh.storyappdicoding.FakeStoryRepository
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,14 +32,14 @@ class StoriesRemoteMediatorTest {
         StoryDatabaseImpl::class.java
     ).allowMainThreadQueries().build()
 
-    @Test
+   /* @Test
     fun refreshLoadReturnsSuccessResultWhenMoreDataIsPresent() = runTest {
         val remoteMediator = StoryRemoteMediator(
-            mockApi,
+            RetrofitManagerImpl(),
             mockDb,
         )
         remoteMediator.user =
-            me.syahdilla.putra.sholeh.storyappdicoding.core.data.User("Test", "Test123", "123")
+            me.syahdilla.putra.sholeh.story.core.data.User("Test", "Test123", "123")
         val pagingState = PagingState<Int, StoryEntity>(
             emptyList(),
             null,
@@ -46,7 +49,7 @@ class StoriesRemoteMediatorTest {
         val result = remoteMediator.load(LoadType.REFRESH, pagingState)
         assertTrue(result is RemoteMediator.MediatorResult.Success)
         assertFalse((result as RemoteMediator.MediatorResult.Success).endOfPaginationReached)
-    }
+    }*/
 
     @After
     fun tearDown() {

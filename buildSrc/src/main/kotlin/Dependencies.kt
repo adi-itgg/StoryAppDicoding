@@ -76,6 +76,7 @@ object Deps {
     private const val roomPaging = "androidx.room:room-paging:$room_version"
     // ======================   Espresso    =======================
     private const val espressoIdlingResource = "androidx.test.espresso:espresso-idling-resource:$androidEkspresso_version"
+    private const val playCore = "com.google.android.play:core:1.10.3"
 }
 
 object KSP {

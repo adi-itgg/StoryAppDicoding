@@ -1,9 +1,11 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.ui.event
 
+import me.syahdilla.putra.sholeh.story.core.data.User
+
 sealed class LoginEvent {
     object Nothing: LoginEvent()
     object InProgress: LoginEvent()
-    class Success(val session: me.syahdilla.putra.sholeh.storyappdicoding.core.data.User): LoginEvent()
+    class Success(val session: User): LoginEvent()
     class Failure(val message: String): LoginEvent()
 }
 

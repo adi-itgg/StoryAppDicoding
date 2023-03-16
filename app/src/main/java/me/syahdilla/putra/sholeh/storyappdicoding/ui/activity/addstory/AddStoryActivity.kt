@@ -14,15 +14,21 @@ import androidx.lifecycle.flowWithLifecycle
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
+import me.syahdilla.putra.sholeh.story.core.utils.animateBounce
+import me.syahdilla.putra.sholeh.story.core.utils.animateChildViews
+import me.syahdilla.putra.sholeh.story.core.utils.animateFade
+import me.syahdilla.putra.sholeh.story.core.utils.animationsEnabled
+import me.syahdilla.putra.sholeh.story.core.utils.playSequentially
+import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
+import me.syahdilla.putra.sholeh.story.core.utils.safeRunOnce
+import me.syahdilla.putra.sholeh.story.core.utils.*
+import me.syahdilla.putra.sholeh.story.core.utils.image.CameraManager
+import me.syahdilla.putra.sholeh.story.core.utils.image.GalleryManager
 import me.syahdilla.putra.sholeh.storyappdicoding.R
 import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ActivityAddStoryBinding
-import me.syahdilla.putra.sholeh.storyappdicoding.isUITest
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.dialog.LoadingDialog
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.DefaultEvent
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.*
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.image.CameraManager
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.image.GalleryManager
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -120,7 +126,10 @@ class AddStoryActivity: BaseActivity<ActivityAddStoryBinding>(ActivityAddStoryBi
 
     private fun animateViews() = with(binding) {
         root.animateChildViews {
-            animateTogether(it.animateBounce(), it.animateFade())
+            animateTogether(
+                it.animateBounce(),
+                it.animateFade()
+            )
         }.playSequentially()
     }
 
