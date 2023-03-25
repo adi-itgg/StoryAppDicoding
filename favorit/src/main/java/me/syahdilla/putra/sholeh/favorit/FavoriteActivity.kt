@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.collectLatest
 import me.syahdilla.putra.sholeh.favorit.adapter.FavoriteAdapter
 import me.syahdilla.putra.sholeh.favorit.databinding.ActivityFavoriteBinding
 import me.syahdilla.putra.sholeh.favorit.di.favoriteModule
+import me.syahdilla.putra.sholeh.favorit.domain.repository.FavoriteRepository
 import me.syahdilla.putra.sholeh.story.core.domain.model.Story
 import me.syahdilla.putra.sholeh.story.core.utils.DataMapper
 import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
