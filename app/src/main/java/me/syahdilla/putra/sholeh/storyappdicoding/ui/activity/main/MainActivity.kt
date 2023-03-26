@@ -1,5 +1,6 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,6 +9,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.flowWithLifecycle
 import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import kotlinx.coroutines.delay
 import me.syahdilla.putra.sholeh.story.core.domain.model.Story
 import me.syahdilla.putra.sholeh.story.core.utils.DataMapper
@@ -24,6 +26,7 @@ import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.maps.MapsActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.storydetails.StoryDetailsActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.adapter.LoadingAdapter
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.adapter.StoryListAdapterPaging
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,6 +36,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private val footerAdapter: LoadingAdapter by inject()
 
     private val viewModel: MainViewModel by viewModel()
+
+    private val splitInstallManager by lazy {
+        SplitInstallManagerFactory.create(get())
+    }
+    private val moduleFavorite = "favorit"
 
     private var hasCreatedNewStory = false
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -83,8 +91,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?) = with(menu) {
+    private lateinit var menuFavorite: MenuItem
+    override fun onCreateOptionsMenu(menu: Menu) = with(menu) {
         menuInflater.inflate(R.menu.main_menu, this)
+        menuFavorite = findItem(R.id.action_favorite)
+        menuFavorite.isVisible = splitInstallManager.installedModules.contains(moduleFavorite)
         true
     }
 
@@ -101,11 +112,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             launcher.open(AddStoryActivity::class)
             true
         }
-        R.id.action_maps -> {
-            MapsActivity::class.openActivity()
+        R.id.action_favorite -> {
+            startActivity(Intent(
+                mThis,
+                Class.forName("me.syahdilla.putra.sholeh.favorit.FavoriteActivity")
+            ))
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!this::menuFavorite.isInitialized) return
+        menuFavorite.isVisible = splitInstallManager.installedModules.contains(moduleFavorite)
     }
 
 }

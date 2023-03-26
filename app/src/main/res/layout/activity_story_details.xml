@@ -66,6 +66,7 @@
             android:layout_height="42dp"
             android:src="@drawable/baseline_favorite_border_24"
             android:layout_margin="24dp"
+            app:tint="@color/colorPrimary"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />

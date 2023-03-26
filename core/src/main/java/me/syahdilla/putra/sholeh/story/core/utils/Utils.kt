@@ -3,6 +3,7 @@
 package me.syahdilla.putra.sholeh.story.core.utils
 
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
@@ -13,6 +14,7 @@ import kotlinx.coroutines.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import me.syahdilla.putra.sholeh.story.core.CoreComponent
 import java.util.*
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
@@ -75,6 +77,7 @@ inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
 private val logger = CustomLogger("SafeLaunch")
 val ignoreErrorHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
     logger.error("Context $coroutineContext\n${throwable.stackTraceToString()}")
+    Toast.makeText(CoreComponent().context, throwable.stackTraceToString(), Toast.LENGTH_SHORT).show()
 }
 private val safeLaunchContextName = CoroutineName("safeLaunch")
 

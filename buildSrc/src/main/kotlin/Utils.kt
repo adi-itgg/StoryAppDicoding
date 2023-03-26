@@ -3,6 +3,8 @@ import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.isAccessible
 
 enum class Type {
+    API,
+    COMPILE_ONLY,
     IMPLEMENTATION,
     DEBUG,
     TEST,
@@ -17,6 +19,8 @@ fun DependencyHandler.implements(clazz: Any, type: Type = Type.IMPLEMENTATION) {
         val value = it.getter.call()
         if (value !is String) return@field
         when (type) {
+            Type.API -> add("api", value)
+            Type.COMPILE_ONLY -> add("compileOnly", value)
             Type.IMPLEMENTATION -> add("implementation", value)
             Type.DEBUG -> add("debugImplementation", value)
             Type.TEST -> add("testImplementation", value)

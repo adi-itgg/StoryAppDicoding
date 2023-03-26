@@ -58,7 +58,7 @@ android {
 
 dependencies {
 
-    compileOnly(project(":favorit"))
+    //compileOnly(project(":favorit"))
     implementation(project(":core"))
     implements(Deps)
     implements(DepsTest, Type.TEST)

@@ -7,9 +7,10 @@
         android:icon="@drawable/ic_pencil_24"
         app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/action_maps"
-        android:title="@string/google_maps"
-        android:icon="@drawable/ic_round_map_24"
+    <item android:id="@+id/action_favorite"
+        android:title="@string/title_favorit"
+        android:icon="@drawable/baseline_favorite_border_24"
+        android:visible="false"
         app:showAsAction="ifRoom" />
 
     <item

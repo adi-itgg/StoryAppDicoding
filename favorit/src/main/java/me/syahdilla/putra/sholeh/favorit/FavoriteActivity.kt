@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.collectLatest
 import me.syahdilla.putra.sholeh.favorit.adapter.FavoriteAdapter
 import me.syahdilla.putra.sholeh.favorit.databinding.ActivityFavoriteBinding
-import me.syahdilla.putra.sholeh.favorit.di.favoriteModule
 import me.syahdilla.putra.sholeh.favorit.domain.repository.FavoriteRepository
 import me.syahdilla.putra.sholeh.story.core.domain.model.Story
 import me.syahdilla.putra.sholeh.story.core.utils.DataMapper
@@ -15,7 +14,6 @@ import me.syahdilla.putra.sholeh.story.core.utils.safeRunOnce
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.storydetails.StoryDetailsActivity
 import org.koin.android.ext.android.inject
-import org.koin.core.context.loadKoinModules
 
 class FavoriteActivity: BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBinding::inflate) {
 
@@ -25,7 +23,7 @@ class FavoriteActivity: BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBi
     override suspend fun onInitialize(savedInstanceState: Bundle?) = with (binding.root) {
 
         // load dependecy
-        loadKoinModules(favoriteModule)
+        //loadKoinModules(favoriteModule)
 
         favAdapter = FavoriteAdapter()
         favAdapter.onItemClick = {

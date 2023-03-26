@@ -31,7 +31,7 @@ android {
 dependencies {
     implementation(project(":app"))
     implementation(project(":core"))
-    implements(Deps)
+    implements(Deps, Type.COMPILE_ONLY)
     implements(DepsTest, Type.TEST)
     implements(DepsAndroidTest, Type.ANDROID_TEST)
     implements(KSP, Type.KSP)
