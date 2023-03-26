@@ -56,10 +56,10 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/remove"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:padding="10dp"
-            android:layout_margin="16dp"
+            android:layout_margin="12dp"
             android:src="@drawable/baseline_delete_24"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

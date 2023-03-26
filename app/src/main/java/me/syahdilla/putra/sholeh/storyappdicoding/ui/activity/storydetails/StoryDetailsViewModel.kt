@@ -6,12 +6,14 @@ import androidx.lifecycle.AndroidViewModel
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.google.android.play.core.tasks.Task
-import kotlinx.coroutines.suspendCancellableCoroutine
 import me.syahdilla.putra.sholeh.story.core.domain.model.Story
 import me.syahdilla.putra.sholeh.story.core.utils.DataMapper
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
+import kotlin.reflect.full.callSuspend
+import kotlin.reflect.full.memberFunctions
+import kotlin.reflect.jvm.isAccessible
 
 @KoinViewModel
 class StoryDetailsViewModel(
@@ -31,8 +33,9 @@ class StoryDetailsViewModel(
             return false
         }
         val favClazz: Any = Class.forName("me.syahdilla.putra.sholeh.favorit.di.FavModule").newInstance()
-        val m = favClazz.javaClass.getDeclaredMethod("module")
-        val module: Module = m.invoke(favClazz) as Module
+        val field = favClazz.javaClass.getDeclaredField("module")
+        field.isAccessible = true
+        val module: Module = field.get(favClazz) as Module
         loadKoinModules(module)
         return true
     }
@@ -46,31 +49,29 @@ class StoryDetailsViewModel(
                 Toast.makeText(context, "Success installing module", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
                 Toast.makeText(context, "Error installing module", Toast.LENGTH_SHORT).show()
-                Toast.makeText(context, it.stackTraceToString(), Toast.LENGTH_SHORT).show()
+                it.printStackTrace()
             }
     }
 
 
-    suspend fun isInFavorite(obj: Any, id: String): Boolean = suspendCancellableCoroutine { cont ->
-        obj.javaClass.getDeclaredMethod(
-            "getFavorite"
-        ).invoke(obj, id, cont) != null
-    }
+    suspend fun isInFavorite(obj: Any, id: String) =
+        obj::class.memberFunctions.find { it.name == "getFavorite" }?.let {
+            it.isAccessible = true
+            it.callSuspend(obj, id) != null
+        } ?: false
 
     suspend fun addOrDeleteFavorite(obj: Any, story: Story) {
         if (isInFavorite(obj, story.id)) {
-            suspendCancellableCoroutine<Unit> { cont ->
-                obj.javaClass.getDeclaredMethod(
-                    "deleteFavorite"
-                ).invoke(obj, story.id, cont)
+            obj::class.memberFunctions.find { it.name == "deleteFavorite" }?.let {
+                it.isAccessible = true
+                it.callSuspend(obj, story.id)
             }
             return
         }
 
-        suspendCancellableCoroutine<Unit> { cont ->
-            obj.javaClass.getDeclaredMethod(
-                "addFavorite"
-            ).invoke(obj, DataMapper.mapDomainToEntity(story), cont)
+        obj::class.memberFunctions.find { it.name == "addFavorite" }?.let {
+            it.isAccessible = true
+            it.callSuspend(obj, DataMapper.mapDomainToEntity(story))
         }
     }
 

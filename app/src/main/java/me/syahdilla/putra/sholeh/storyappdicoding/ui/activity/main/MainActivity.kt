@@ -22,7 +22,6 @@ import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ActivityMainBindin
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.addstory.AddStoryActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.login.LoginActivity
-import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.maps.MapsActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.storydetails.StoryDetailsActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.adapter.LoadingAdapter
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.adapter.StoryListAdapterPaging

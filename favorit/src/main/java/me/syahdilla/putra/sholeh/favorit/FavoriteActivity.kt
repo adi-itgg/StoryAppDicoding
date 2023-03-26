@@ -6,24 +6,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.collectLatest
 import me.syahdilla.putra.sholeh.favorit.adapter.FavoriteAdapter
 import me.syahdilla.putra.sholeh.favorit.databinding.ActivityFavoriteBinding
-import me.syahdilla.putra.sholeh.favorit.domain.repository.FavoriteRepository
+import me.syahdilla.putra.sholeh.favorit.di.FavModule
+import me.syahdilla.putra.sholeh.favorit.domain.usecase.FavoriteUseCase
 import me.syahdilla.putra.sholeh.story.core.domain.model.Story
 import me.syahdilla.putra.sholeh.story.core.utils.DataMapper
 import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
 import me.syahdilla.putra.sholeh.story.core.utils.safeRunOnce
+import me.syahdilla.putra.sholeh.storyappdicoding.R
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.storydetails.StoryDetailsActivity
 import org.koin.android.ext.android.inject
+import org.koin.core.context.loadKoinModules
+import org.koin.core.qualifier.named
 
 class FavoriteActivity: BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBinding::inflate) {
 
-    private val favoriteRepository: FavoriteRepository by inject()
+    private val usecase: FavoriteUseCase by inject(qualifier = named("favoriteUseCase"))
     private lateinit var favAdapter: FavoriteAdapter
 
-    override suspend fun onInitialize(savedInstanceState: Bundle?) = with (binding.root) {
+    override val showTopLeftBackButton = true
 
-        // load dependecy
-        //loadKoinModules(favoriteModule)
+    override suspend fun onInitialize(savedInstanceState: Bundle?) = with (binding.root) {
+        title = getString(R.string.title_favorit)
+
+        loadKoinModules(FavModule().module)
 
         favAdapter = FavoriteAdapter()
         favAdapter.onItemClick = {
@@ -39,7 +45,7 @@ class FavoriteActivity: BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBi
         }
         favAdapter.onRemoveItemClick = {
             safeRunOnce(7192) {
-                favoriteRepository.deleteFavorite(it.id)
+                usecase.deleteFavorite(it.id)
             }
         }
 
@@ -48,7 +54,7 @@ class FavoriteActivity: BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBi
 
 
         safeLaunch {
-            favoriteRepository.getFavorites().flowWithLifecycle(lifecycle).collectLatest { dataList ->
+            usecase.getFavorites().flowWithLifecycle(lifecycle).collectLatest { dataList ->
                 favAdapter.differ.submitList(dataList.map { data -> DataMapper.mapEntityToDomain(data) })
             }
         }
