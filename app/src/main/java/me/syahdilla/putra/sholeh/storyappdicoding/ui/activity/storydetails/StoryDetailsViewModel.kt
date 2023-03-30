@@ -1,13 +1,11 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.storydetails
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.google.android.play.core.tasks.Task
 import me.syahdilla.putra.sholeh.story.core.domain.model.Story
-import me.syahdilla.putra.sholeh.story.core.utils.DataMapper
 import org.koin.android.annotation.KoinViewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
@@ -45,12 +43,6 @@ class StoryDetailsViewModel(
             .addModule(moduleFavorite)
             .build()
         return splitInstallManager.startInstall(request)
-            .addOnSuccessListener {
-                Toast.makeText(context, "Success installing module", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener {
-                Toast.makeText(context, "Error installing module", Toast.LENGTH_SHORT).show()
-                it.printStackTrace()
-            }
     }
 
 
@@ -71,7 +63,7 @@ class StoryDetailsViewModel(
 
         obj::class.memberFunctions.find { it.name == "addFavorite" }?.let {
             it.isAccessible = true
-            it.callSuspend(obj, DataMapper.mapDomainToEntity(story))
+            it.callSuspend(obj, story)
         }
     }
 

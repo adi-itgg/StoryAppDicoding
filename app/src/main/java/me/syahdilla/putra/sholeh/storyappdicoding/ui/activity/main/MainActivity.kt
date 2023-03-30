@@ -112,10 +112,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             true
         }
         R.id.action_favorite -> {
-            startActivity(Intent(
-                mThis,
-                Class.forName("me.syahdilla.putra.sholeh.favorit.FavoriteActivity")
-            ))
+            startActivity(Intent(mThis, Class.forName("me.syahdilla.putra.sholeh.favorit.activity.FavoriteActivity")))
             true
         }
         else -> super.onOptionsItemSelected(item)

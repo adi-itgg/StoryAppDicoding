@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -14,11 +13,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import io.ktor.http.parsing.*
-import me.syahdilla.putra.sholeh.story.core.UserManager
 import me.syahdilla.putra.sholeh.story.core.domain.model.Story
-import me.syahdilla.putra.sholeh.story.core.domain.repository.StoryRepository
 import me.syahdilla.putra.sholeh.story.core.utils.customLogger
-import me.syahdilla.putra.sholeh.story.core.utils.image.ImageManager
 import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
 import me.syahdilla.putra.sholeh.story.core.utils.tryRun
 import me.syahdilla.putra.sholeh.storyappdicoding.R
@@ -28,13 +24,11 @@ import org.koin.android.ext.android.inject
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val logger by customLogger()
+    private val viewModel: MapViewModel by inject()
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private lateinit var markerIcon: BitmapDescriptor
-
-    private val storyRepository: StoryRepository by inject()
-    private val imageManager: ImageManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,18 +80,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
         safeLaunch {
-            markerIcon = imageManager.vectorToBitmap(
-                R.drawable.ic_round_account_circle_24,
-                ContextCompat.getColor(this@MapsActivity, R.color.story_marker_color)
-            )
+            markerIcon = viewModel.getMarkIcon()
 
             for (i in 1..15) {
-                val res = storyRepository.getStories(
-                    user = UserManager.session,
-                    withLocation = true,
-                    page = i,
-                    size = 10
-                ).getOrNull() ?: break
+                val res = viewModel.getStories(page = i, size = 10).getOrNull() ?: break
                 if (res.error || res.listStory.isEmpty()) break
 
                 logger.debug { "Loaded page $i" }

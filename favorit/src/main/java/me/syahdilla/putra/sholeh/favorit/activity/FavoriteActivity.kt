@@ -1,4 +1,4 @@
-package me.syahdilla.putra.sholeh.favorit
+package me.syahdilla.putra.sholeh.favorit.activity
 
 import android.os.Bundle
 import androidx.lifecycle.flowWithLifecycle
@@ -7,9 +7,7 @@ import kotlinx.coroutines.flow.collectLatest
 import me.syahdilla.putra.sholeh.favorit.adapter.FavoriteAdapter
 import me.syahdilla.putra.sholeh.favorit.databinding.ActivityFavoriteBinding
 import me.syahdilla.putra.sholeh.favorit.di.FavModule
-import me.syahdilla.putra.sholeh.favorit.domain.usecase.FavoriteUseCase
 import me.syahdilla.putra.sholeh.story.core.domain.model.Story
-import me.syahdilla.putra.sholeh.story.core.utils.DataMapper
 import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
 import me.syahdilla.putra.sholeh.story.core.utils.safeRunOnce
 import me.syahdilla.putra.sholeh.storyappdicoding.R
@@ -17,11 +15,10 @@ import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.storydetails.StoryDetailsActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
-import org.koin.core.qualifier.named
 
 class FavoriteActivity: BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBinding::inflate) {
 
-    private val usecase: FavoriteUseCase by inject(qualifier = named("favoriteUseCase"))
+    private val viewModel: FavoriteViewModel by inject()
     private lateinit var favAdapter: FavoriteAdapter
 
     override val showTopLeftBackButton = true
@@ -45,7 +42,7 @@ class FavoriteActivity: BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBi
         }
         favAdapter.onRemoveItemClick = {
             safeRunOnce(7192) {
-                usecase.deleteFavorite(it.id)
+                viewModel.deleteFavorite(it.id)
             }
         }
 
@@ -54,8 +51,8 @@ class FavoriteActivity: BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBi
 
 
         safeLaunch {
-            usecase.getFavorites().flowWithLifecycle(lifecycle).collectLatest { dataList ->
-                favAdapter.differ.submitList(dataList.map { data -> DataMapper.mapEntityToDomain(data) })
+            viewModel.getFavorites().flowWithLifecycle(lifecycle).collectLatest { dataList ->
+                favAdapter.differ.submitList(dataList)
             }
         }
         Unit

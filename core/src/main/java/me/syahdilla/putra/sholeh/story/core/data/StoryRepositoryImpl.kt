@@ -48,7 +48,7 @@ class StoryRepositoryImpl(
     }
 
     override suspend fun login(email: String, password: String) = wrapEspressoIdlingResource {
-        api.login(me.syahdilla.putra.sholeh.story.core.data.UserLogin(email, password)).awaitBody()
+        api.login(UserLogin(email, password)).awaitBody()
     }
 
 
@@ -57,7 +57,7 @@ class StoryRepositoryImpl(
     }
 
     override suspend fun getStories(token: String, withLocation: Boolean, page: Int?, size: Int?) = api.getAllStories(token.asBearerToken, if (withLocation) 1 else null, page, size).awaitBody()
-    override suspend fun getStories(user: me.syahdilla.putra.sholeh.story.core.data.User, withLocation: Boolean, page: Int?, size: Int?) = getStories(user.token, withLocation, page, size)
+    override suspend fun getStories(user: User, withLocation: Boolean, page: Int?, size: Int?) = getStories(user.token, withLocation, page, size)
 
     override suspend fun getStoryDetails(id: String, token: String) = api.getStoryDetails(id, token.asBearerToken).awaitBody()
 
