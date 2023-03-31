@@ -7,12 +7,10 @@ import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.flowWithLifecycle
-import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import kotlinx.coroutines.delay
 import me.syahdilla.putra.sholeh.story.core.domain.model.Story
-import me.syahdilla.putra.sholeh.story.core.utils.DataMapper
 import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
 import me.syahdilla.putra.sholeh.story.core.utils.safeRunOnce
 import me.syahdilla.putra.sholeh.storyappdicoding.PREF_USER_SESSION
@@ -74,7 +72,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
         safeLaunch {
             viewModel.getStoriesMediator().flowWithLifecycle(lifecycle).collect { pagingData ->
-                adapterPaging.submitData(pagingData.map { entity -> DataMapper.mapEntityToDomain(entity) })
+                adapterPaging.submitData(pagingData)
                 if (!hasCreatedNewStory) return@collect
                 safeRunOnce(id = 90, cancelAndWait = true) {
                     delay(1_000)

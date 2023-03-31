@@ -1,26 +1,15 @@
-package me.syahdilla.putra.sholeh.story
+package me.syahdilla.putra.sholeh.storyappdicoding
 
 import androidx.paging.*
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import junit.framework.TestCase.assertFalse
-import junit.framework.TestCase.assertTrue
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
-import me.syahdilla.putra.sholeh.story.core.data.source.local.entity.StoryEntity
 import me.syahdilla.putra.sholeh.story.core.data.source.local.room.story.StoryDatabase
 import me.syahdilla.putra.sholeh.story.core.data.source.local.room.story.StoryDatabaseImpl
-import me.syahdilla.putra.sholeh.story.core.data.source.remote.RetrofitManager
-import me.syahdilla.putra.sholeh.story.core.data.source.remote.RetrofitManagerImpl
-import me.syahdilla.putra.sholeh.story.core.data.source.remote.StoryRemoteMediator
 import me.syahdilla.putra.sholeh.story.core.domain.repository.StoryRepository
-import me.syahdilla.putra.sholeh.storyappdicoding.FakeStoryRepository
 import org.junit.After
-import org.junit.Test
 import org.junit.runner.RunWith
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @ExperimentalPagingApi
 @RunWith(AndroidJUnit4::class)
 class StoriesRemoteMediatorTest {
@@ -39,7 +28,7 @@ class StoriesRemoteMediatorTest {
             mockDb,
         )
         remoteMediator.user =
-            me.syahdilla.putra.sholeh.story.core.data.User("Test", "Test123", "123")
+            me.syahdilla.putra.sholeh.story.core.domain.model.User("Test", "Test123", "123")
         val pagingState = PagingState<Int, StoryEntity>(
             emptyList(),
             null,

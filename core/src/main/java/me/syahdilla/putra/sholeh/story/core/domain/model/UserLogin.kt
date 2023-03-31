@@ -1,4 +1,4 @@
-package me.syahdilla.putra.sholeh.story.core.data
+package me.syahdilla.putra.sholeh.story.core.domain.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

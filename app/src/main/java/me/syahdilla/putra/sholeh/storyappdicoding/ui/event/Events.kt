@@ -1,6 +1,6 @@
 package me.syahdilla.putra.sholeh.storyappdicoding.ui.event
 
-import me.syahdilla.putra.sholeh.story.core.data.User
+import me.syahdilla.putra.sholeh.story.core.domain.model.User
 
 sealed class LoginEvent {
     object Nothing: LoginEvent()

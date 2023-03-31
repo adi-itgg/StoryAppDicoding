@@ -1,6 +1,6 @@
 package me.syahdilla.putra.sholeh.story.core
 
-import me.syahdilla.putra.sholeh.story.core.data.User
+import me.syahdilla.putra.sholeh.story.core.domain.model.User
 import java.text.SimpleDateFormat
 import java.util.*
 

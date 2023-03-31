@@ -10,6 +10,8 @@ import me.syahdilla.putra.sholeh.story.core.data.source.local.room.story.StoryDa
 import me.syahdilla.putra.sholeh.story.core.data.source.remote.RetrofitManager
 import me.syahdilla.putra.sholeh.story.core.data.source.remote.StoryRemoteMediator
 import me.syahdilla.putra.sholeh.story.core.data.source.remote.response.ApiBasicResponse
+import me.syahdilla.putra.sholeh.story.core.domain.model.User
+import me.syahdilla.putra.sholeh.story.core.domain.model.UserLogin
 import me.syahdilla.putra.sholeh.story.core.domain.repository.StoryRepository
 import me.syahdilla.putra.sholeh.story.core.utils.asObject
 import me.syahdilla.putra.sholeh.story.core.utils.customLogger
@@ -69,7 +71,7 @@ class StoryRepositoryImpl(
     }
 
     override suspend fun createStory(imageManager: ImageManager, token: String, description: String, photo: Uri, lat: Float?, lon: Float?) = withContext(IO) {
-        val file = imageManager.uriToFile(photo) ?: return@withContext null
+        val file = imageManager.uriToFile(photo) as File
         createStory(token, description, file, lat, lon)
     }
 

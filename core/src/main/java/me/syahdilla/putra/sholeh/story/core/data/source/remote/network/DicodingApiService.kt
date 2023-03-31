@@ -4,6 +4,7 @@ import me.syahdilla.putra.sholeh.story.core.data.source.remote.response.ApiBasic
 import me.syahdilla.putra.sholeh.story.core.data.source.remote.response.StoriesResponse
 import me.syahdilla.putra.sholeh.story.core.data.source.remote.response.StoryResponse
 import me.syahdilla.putra.sholeh.story.core.data.source.remote.response.UserResponse
+import me.syahdilla.putra.sholeh.story.core.domain.model.UserLogin
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -13,7 +14,7 @@ interface DicodingApiService {
 
     @POST("login")
     fun login(
-        @Body userLogin: me.syahdilla.putra.sholeh.story.core.data.UserLogin
+        @Body userLogin: UserLogin
     ): Call<UserResponse>
 
     @FormUrlEncoded

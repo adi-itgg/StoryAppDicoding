@@ -52,7 +52,7 @@ class FavoriteActivity: BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBi
 
         safeLaunch {
             viewModel.getFavorites().flowWithLifecycle(lifecycle).collectLatest { dataList ->
-                favAdapter.differ.submitList(dataList)
+                favAdapter.differ.submitList(dataList.asReversed())
             }
         }
         Unit

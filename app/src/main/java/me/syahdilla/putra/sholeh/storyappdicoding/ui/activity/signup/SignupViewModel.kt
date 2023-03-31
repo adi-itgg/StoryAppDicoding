@@ -26,15 +26,11 @@ class SignupViewModel(
     fun register(name: String, email: String, password: String) = safeRunOnce(33) {
         _state.emit(DefaultEvent.InProgress)
 
-        val response = userUseCase.register(name, email, password).getOrNull()
-        val message = response?.message ?: context.getString(R.string.register_failure)
-        val isFailure = response?.error ?: true
-        _state.emit(
-            if (isFailure)
-                DefaultEvent.Failure(message)
-            else
-                DefaultEvent.Success
-        )
+        userUseCase.register(name, email, password).onSuccess {
+            _state.emit(DefaultEvent.Success)
+        }.onFailure {
+            _state.emit(DefaultEvent.Failure(it.message ?: context.getString(R.string.register_failure)))
+        }
     }
 
 }

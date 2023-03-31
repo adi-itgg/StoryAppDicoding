@@ -11,6 +11,7 @@ import me.syahdilla.putra.sholeh.story.core.UserManager
 import me.syahdilla.putra.sholeh.story.core.data.source.local.entity.RemoteKeysEntity
 import me.syahdilla.putra.sholeh.story.core.data.source.local.entity.StoryEntity
 import me.syahdilla.putra.sholeh.story.core.data.source.local.room.story.StoryDatabase
+import me.syahdilla.putra.sholeh.story.core.domain.model.User
 import me.syahdilla.putra.sholeh.story.core.utils.isUITest
 import me.syahdilla.putra.sholeh.story.core.utils.*
 import org.koin.core.annotation.Factory
@@ -26,7 +27,7 @@ class StoryRemoteMediator(
 
     private val logger by customLogger()
 
-    var user: me.syahdilla.putra.sholeh.story.core.data.User? = null
+    var user: User? = null
 
     override suspend fun initialize() = InitializeAction.LAUNCH_INITIAL_REFRESH
 

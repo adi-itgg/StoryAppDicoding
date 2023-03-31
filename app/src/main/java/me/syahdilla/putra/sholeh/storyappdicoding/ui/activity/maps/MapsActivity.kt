@@ -83,11 +83,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             markerIcon = viewModel.getMarkIcon()
 
             for (i in 1..15) {
-                val res = viewModel.getStories(page = i, size = 10).getOrNull() ?: break
-                if (res.error || res.listStory.isEmpty()) break
+                val stories = viewModel.getStories(page = i, size = 10).getOrNull() ?: break
 
                 logger.debug { "Loaded page $i" }
-                res.listStory.forEach { story ->
+                stories.forEach { story ->
                     addMarker(story)
                 }
 

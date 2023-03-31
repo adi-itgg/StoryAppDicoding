@@ -58,16 +58,11 @@ class AddStoryViewModel(
                 photo = photoUri,
                 lat = lat,
                 lon = lon
-            )) ?: return@safeRunOnce _state.emit(DefaultEvent.Failure("Failure write image file to temporary folder!"))
+            ))
 
 
         res.onSuccess {
-            _state.emit(
-                if (it.error)
-                    DefaultEvent.Failure(it.message)
-                else
-                    DefaultEvent.Success
-            )
+            _state.emit(DefaultEvent.Success)
         }.onFailure {
             _state.emit(DefaultEvent.Failure("Connection to api error!"))
         }

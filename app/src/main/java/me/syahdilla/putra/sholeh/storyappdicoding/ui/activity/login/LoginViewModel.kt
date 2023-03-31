@@ -33,23 +33,18 @@ class LoginViewModel(
     fun login(email: String, password: String) = safeRunOnce(1) {
         _state.emit(LoginEvent.InProgress)
 
-        val response = userUseCase.login(
+         userUseCase.login(
             email = email,
             password = password
-        ).getOrNull()
-
-        response?.loginResult?.let { session ->
-            context.dataStore.edit {
-                it[PREF_USER_SESSION] = session.asJson()
-            }
-            logger.debug("login success and saved user session")
-            _state.emit(LoginEvent.Success(session))
-            return@safeRunOnce
-        }
-        logger.debug("login failure, cause ${if (response == null) "response is null" else "response user session is null"}")
-
-        val msg = response?.message ?: context.getString(R.string.login_failure)
-        _state.emit(LoginEvent.Failure(msg))
+        ).onSuccess { user ->
+             context.dataStore.edit {
+                 it[PREF_USER_SESSION] = user.asJson()
+             }
+             logger.debug("login success and saved user session")
+             _state.emit(LoginEvent.Success(user))
+         }.onFailure {
+             _state.emit(LoginEvent.Failure(it.message ?: context.getString(R.string.login_failure)))
+         }
     }
 
     suspend fun hasSession() = context.dataStore.data.firstOrNull()?.get(PREF_USER_SESSION)?.let {
