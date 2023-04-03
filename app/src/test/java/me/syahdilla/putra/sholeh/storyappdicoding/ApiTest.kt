@@ -7,14 +7,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import me.syahdilla.putra.sholeh.story.core.domain.model.User
 import me.syahdilla.putra.sholeh.story.core.domain.repository.StoryRepository
-import me.syahdilla.putra.sholeh.storyappdicoding.utils.KoinTesting
 import me.syahdilla.putra.sholeh.story.core.utils.asJson
 import me.syahdilla.putra.sholeh.story.core.utils.customLogger
+import me.syahdilla.putra.sholeh.storyappdicoding.utils.KoinTesting
 import org.koin.test.inject
 import java.io.File
 import kotlin.random.Random
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class ApiTest: KoinTesting {
@@ -39,19 +38,16 @@ class ApiTest: KoinTesting {
         val response = repository.login(
             email = userTest.first,
             password = userTest.second).getOrThrow()
-        if (response.error)
-            return@runTest logger.error("Login gagal:", response.message)
-        logger.debug("Login", response.message)
+        logger.debug("Login", response.name)
     }
 
     @Test
     fun `test user register`() = runTest {
-        val response = repository.register(
+        repository.register(
             name = "User Test 1",
             email = userTest.first,
             password = userTest.second
         ).getOrThrow()
-        assertEquals(response.message, "Email is already taken")
     }
 
     @Test
@@ -62,7 +58,6 @@ class ApiTest: KoinTesting {
             page = null,
             size = null
         ).getOrThrow()
-        assertTrue { !response.error }
         logger.debug("Success with result:\n", response.asJson(prettyPrint = true))
     }
 
@@ -72,20 +67,16 @@ class ApiTest: KoinTesting {
             id = "story-h88og1LDkqfb7bb2",
             token = userTestSession.token
         ).getOrThrow()
-        assertTrue { !response.error }
         logger.debug("Success with result:\n", response.asJson(prettyPrint = true))
     }
 
     @Test
     fun `test create story`() = runTest {
-        val response = repository.createStory(
+        repository.createStory(
             token = userTestSession.token,
             description = "test ${Random.nextLong(Int.MAX_VALUE.toLong())}",
             File(classLoader.getResource("man.png").file)
         ).getOrThrow()
-
-        logger.debug { "result isError: ${response.error} - message: ${response.message}" }
-        assertTrue { !response.error }
     }
 
     @Test
@@ -96,8 +87,7 @@ class ApiTest: KoinTesting {
             page = 1,
             size = 10
         ).getOrThrow()
-        assertTrue { !response.error }
-        assertTrue { response.listStory.isNotEmpty() }
+        assertTrue { response.isNotEmpty() }
         logger.debug("Success with result:\n", response.asJson(prettyPrint = true))
     }
 
