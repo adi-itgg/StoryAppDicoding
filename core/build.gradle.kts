@@ -15,12 +15,13 @@ android {
         targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        //consumerProguardFiles("consumer-rules.pro")
+        consumerProguardFiles("consumer-rules.pro")
         buildConfigField(
             type = "String",
             name = "BASE_API_URL",
             value = "\"https://story-api.dicoding.dev/v1/\""
         )
+        buildConfigField("String", "SECRET_PASS", "\"secret\"")
     }
 
     buildTypes {

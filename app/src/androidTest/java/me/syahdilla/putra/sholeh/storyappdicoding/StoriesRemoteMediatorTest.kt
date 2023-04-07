@@ -6,7 +6,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import me.syahdilla.putra.sholeh.story.core.data.source.local.room.story.StoryDatabase
 import me.syahdilla.putra.sholeh.story.core.data.source.local.room.story.StoryDatabaseImpl
-import me.syahdilla.putra.sholeh.story.core.domain.repository.StoryRepository
 import org.junit.After
 import org.junit.runner.RunWith
 
@@ -14,8 +13,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class StoriesRemoteMediatorTest {
 
-    private var mockApi: StoryRepository =
-        FakeStoryRepository()
     private var mockDb: StoryDatabase = Room.inMemoryDatabaseBuilder(
         ApplicationProvider.getApplicationContext(),
         StoryDatabaseImpl::class.java

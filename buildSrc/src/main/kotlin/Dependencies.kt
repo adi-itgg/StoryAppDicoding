@@ -74,6 +74,7 @@ object Deps {
     private const val room = "androidx.room:room-runtime:$room_version"
     private const val roomExtension = "androidx.room:room-ktx:$room_version"
     private const val roomPaging = "androidx.room:room-paging:$room_version"
+    private const val sqlcipher = "net.zetetic:android-database-sqlcipher:4.5.3"
     // ======================   Espresso    =======================
     private const val espressoIdlingResource = "androidx.test.espresso:espresso-idling-resource:$androidEkspresso_version"
     private const val playCore = "com.google.android.play:core:1.10.3"

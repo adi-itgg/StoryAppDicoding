@@ -23,8 +23,12 @@ android {
     }
 
     buildTypes {
+        named("debug") {
+            isMinifyEnabled = true
+            setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
+        }
         named("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
@@ -63,5 +67,7 @@ dependencies {
     implements(DepsTest, Type.TEST)
     implements(DepsAndroidTest, Type.ANDROID_TEST)
     implements(KSP, Type.KSP)
+
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10")
 
 }

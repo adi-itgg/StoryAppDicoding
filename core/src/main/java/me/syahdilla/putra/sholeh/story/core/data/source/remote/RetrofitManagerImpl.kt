@@ -14,7 +14,7 @@ class RetrofitManagerImpl(
     private val client: OkHttpClient
 ): RetrofitManager {
 
-    override val retrofit by lazy {
+    override val retrofit: Retrofit by lazy {
         val contentType = "application/json".toMediaType()
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_API_URL)

@@ -20,6 +20,7 @@ class FavModule {
     val module = module {
         single {
             Room.databaseBuilder(androidContext(), FavoriteDatabaseImpl::class.java, "favorite-db")
+                .openHelperFactory(get())
                 .build()
         } bind FavoriteDatabase::class
         singleOf(::FavoriteRepositoryImpl) bind FavoriteRepository::class

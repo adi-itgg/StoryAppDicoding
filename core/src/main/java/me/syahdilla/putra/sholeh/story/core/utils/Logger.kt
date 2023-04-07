@@ -8,7 +8,6 @@ class CustomLogger(
 ) {
 
     constructor(clazz: KClass<*>) : this(clazz.java.simpleName)
-    constructor(clazz: Class<*>) : this(clazz.simpleName)
 
     enum class Level(val value: Int) {
         VERBOSE(2),
@@ -86,33 +85,16 @@ class CustomLogger(
 
     fun verbose(vararg logs: String?) =
         sendLog(Level.VERBOSE, logs.toList())
-    inline fun verbose(logs: () -> String) =
-        verbose(logs())
 
     fun debug(vararg logs: String?) =
         sendLog(Level.DEBUG, logs.toList())
     inline fun debug(logs: () -> String) =
         debug(logs())
 
-    fun info(vararg logs: String?) =
-        sendLog(Level.INFO, logs.toList())
-    inline fun info(logs: () -> String) =
-        info(logs())
-
-    fun warn(vararg logs: String?) =
-        sendLog(Level.WARN, logs.toList())
-    inline fun warn(logs: () -> String) =
-        warn(logs())
-
     fun error(vararg logs: String?) =
         sendLog(Level.ERROR, logs.toList())
     inline fun error(logs: () -> String) =
         error(logs())
-
-    fun assert(vararg logs: String?) =
-        sendLog(Level.ASSERT, logs.toList())
-    inline fun assert(logs: () -> String) =
-        assert(logs())
 
 }
 
@@ -125,22 +107,17 @@ private const val RESET = "$ESCAPE[0m"
 private const val BG_JUMP = 10
 
 enum class Color(baseCode: Int) {
-    BLACK(30),
     RED(31),
     GREEN(32),
     YELLOW(33),
     BLUE(34),
     MAGENTA(35),
-    CYAN(36),
     LIGHT_GRAY(37),
 
-    DARK_GRAY(90),
     LIGHT_RED(91),
-    LIGHT_GREEN(92),
     LIGHT_YELLOW(93),
     LIGHT_BLUE(94),
     LIGHT_MAGENTA(95),
-    LIGHT_CYAN(96),
     WHITE(97);
 
     val foreground: String = "$ESCAPE[${baseCode}m"
