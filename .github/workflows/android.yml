@@ -11,17 +11,7 @@ on:
       - final
 
 jobs:
-  android-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-      - run: ./gradlew lint
-      - name: Run Android Lint
-        uses: yutailang0119/action-android-lint@v3.1.0
-        with:
-          report-path: build/reports/*.xml
-  build:
+  setup-job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -31,17 +21,20 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           cache: gradle
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
+  android-lint:
+    needs: setup-job
+    steps:
+      - run: ./gradlew lint
       - name: Run Android Lint
         uses: yutailang0119/action-android-lint@v3.1.0
         with:
           report-path: build/reports/*.xml
-
+  build:
+    needs: setup-job
+    steps:
       - name: Build with Gradle
         run: ./gradlew bundleDebug --stacktrace
-
       - name: Godot Android Export
         uses: dulvui/godot-android-export@v2.0.0
