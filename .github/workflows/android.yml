@@ -28,10 +28,9 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Android Lint
-        uses: dvdandroid/action-android-lint@master
+        uses: yutailang0119/action-android-lint@v3.1.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          lint_xml_file: app/build/reports/lint-results.xml
+          report-path: build/reports/*.xml
 
       - name: Build with Gradle
         run: ./gradlew build
