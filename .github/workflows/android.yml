@@ -25,6 +25,7 @@ jobs:
         run: chmod +x gradlew
   android-lint:
     needs: setup-job
+    runs-on: ubuntu-latest
     steps:
       - run: ./gradlew lint
       - name: Run Android Lint
@@ -33,6 +34,7 @@ jobs:
           report-path: build/reports/*.xml
   build:
     needs: setup-job
+    runs-on: ubuntu-latest
     steps:
       - name: Build with Gradle
         run: ./gradlew bundleDebug --stacktrace
