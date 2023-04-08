@@ -72,7 +72,6 @@ class CameraManager(
         conti.invokeOnCancellation { imageResult = null }
 
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        intent.resolveActivity(activity.packageManager)
 
         val photoUri = createCustomTempFile().run {
             photoFile = this
