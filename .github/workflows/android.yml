@@ -41,6 +41,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew bundleDebug --stacktrace
+        run: ./gradlew :app:bundleDebug --stacktrace
       - name: Godot Android Export
         uses: dulvui/godot-android-export@v2.0.0
