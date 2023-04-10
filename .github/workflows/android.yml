@@ -5,10 +5,12 @@ on:
     branches:
       - master
       - final
+      - no_buildsrc
   pull_request:
     branches:
       - master
       - final
+      - no_buildsrc
 
 jobs:
   android-lint:
@@ -42,5 +44,3 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew :app:bundleDebug --stacktrace
-      - name: Godot Android Export
-        uses: dulvui/godot-android-export@v2.0.0
