@@ -1,8 +1,11 @@
-package me.syahdilla.putra.sholeh.storyappdicoding.di
+package me.syahdilla.putra.sholeh.story.core.di
 
-import me.syahdilla.putra.sholeh.story.core.di.coreModule
+import me.syahdilla.putra.sholeh.story.core.data.source.local.room.story.StoryDatabase
+import me.syahdilla.putra.sholeh.story.core.fake.FakeStoryDatabaseImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val testModules by lazy {
@@ -23,4 +26,5 @@ private val singletons = module {
         }
         OkHttpClient.Builder().addInterceptor(logging).build()
     }
+    singleOf(::FakeStoryDatabaseImpl) bind StoryDatabase::class
 }

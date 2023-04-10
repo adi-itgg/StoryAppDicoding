@@ -20,10 +20,10 @@ object EspressoIdlingResource {
 }
 
 inline fun <T> wrapEspressoIdlingResource(function: () -> T): T {
-    EspressoIdlingResource.increment()
+    if (isUITest) EspressoIdlingResource.increment()
     return try {
         function()
     } finally {
-        EspressoIdlingResource.decrement()
+        if (isUITest) EspressoIdlingResource.decrement()
     }
 }

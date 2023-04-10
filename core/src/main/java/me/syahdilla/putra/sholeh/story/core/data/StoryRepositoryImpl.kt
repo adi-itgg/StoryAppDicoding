@@ -56,7 +56,9 @@ class StoryRepositoryImpl(
 
     override suspend fun register(name: String, email: String, password: String) = wrapEspressoIdlingResource {
         tryRun {
-            api.register(name, email, password).awaitBody().getOrThrow().loginResult as User
+            val res = api.register(name, email, password).awaitBody().getOrThrow()
+            if (res.loginResult == null) throw Exception(res.message)
+            res.loginResult as User
         }
     }
 

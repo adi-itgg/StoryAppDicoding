@@ -13,7 +13,7 @@ import me.syahdilla.putra.sholeh.story.core.data.source.local.room.remotekeys.Re
     version = 1,
     exportSchema = false
 )
-abstract class StoryDatabaseImpl: StoryDatabase() {
+abstract class StoryDatabaseImpl: StoryDatabase, RoomDatabase() {
 
     abstract fun storyDao(): StoryDao
     abstract fun remoteKeysDao(): RemoteKeysDao
