@@ -5,10 +5,12 @@ on:
     branches:
       - master
       - final
+      - no_buildsrc
   pull_request:
     branches:
       - master
       - final
+      - no_buildsrc
 
 jobs:
   android-lint:
