@@ -34,10 +34,5 @@
     <string name="retry">Retry</string>
     <string name="show_my_location">Show my location</string>
 
-    <string name="title_activity_maps" translatable="false">MapsActivity</string>
-    <string name="normal" translatable="false">Normal</string>
-    <string name="satellite" translatable="false">Satellite</string>
-    <string name="terrain" translatable="false">Terrain</string>
-    <string name="hybrid" translatable="false">Hybrid</string>
     <string name="title_favorit">Favorite</string>
 </resources>

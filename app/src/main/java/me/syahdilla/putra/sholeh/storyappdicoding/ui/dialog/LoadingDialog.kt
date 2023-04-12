@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import me.syahdilla.putra.sholeh.storyappdicoding.databinding.DialogLoadingBinding
 
-class LoadingDialog: DialogFragment() {
+class LoadingDialog: DialogFragment(), DefaultLifecycleObserver {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,14 +24,21 @@ class LoadingDialog: DialogFragment() {
     }
 
     override fun onStart() {
-        super.onStart()
+        super<DialogFragment>.onStart()
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
 
-    fun close() {
-        if (dialog?.isShowing == true) dismiss()
+    fun close() = runCatching {
+        dismiss()
     }
 
-    fun show(mActivity: AppCompatActivity) = show(mActivity.supportFragmentManager, this::class.java.simpleName)
+    fun show(mActivity: AppCompatActivity) {
+        mActivity.lifecycle.addObserver(this)
+        show(mActivity.supportFragmentManager, this::class.java.simpleName)
+    }
+
+    override fun onDestroy(owner: LifecycleOwner) {
+        close()
+    }
 
 }

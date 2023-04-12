@@ -11,6 +11,4 @@
     <color name="colorPrimary">@color/ic_launcher_distory_background</color>
     <color name="colorPrimaryVariant">#3974FD</color>
     <color name="textColor">#CD4A92FF</color>
-
-    <color name="story_marker_color">#4F5ED8</color>
 </resources>
