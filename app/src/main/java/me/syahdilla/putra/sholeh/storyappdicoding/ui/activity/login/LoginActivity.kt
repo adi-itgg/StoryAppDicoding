@@ -23,13 +23,12 @@ import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.signup.PASSWORD_RE
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.signup.SignupActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.dialog.LoadingDialog
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.LoginEvent
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
 
     private val viewModel: LoginViewModel by viewModel()
-    private val loading: LoadingDialog by inject()
+    private var loading: LoadingDialog? = null
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode != Activity.RESULT_OK) return@registerForActivityResult
         logger.debug("Register result is OK")
@@ -69,7 +68,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         safeLaunch {
             viewModel.state.flowWithLifecycle(lifecycle).distinctUntilChanged().collectLatest {
                 if (it != LoginEvent.InProgress) {
-                    loading.close()
+                    loading?.close()
+                    loading = null
                     EspressoIdlingResource.decrement()
                 }
                 when (it) {
@@ -82,7 +82,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                         )
                         finish()
                     }
-                    LoginEvent.InProgress -> loading.show(mThis)
+                    LoginEvent.InProgress -> loading = LoadingDialog().show(mThis)
                     else -> {}
                 }
             }
@@ -135,5 +135,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     }
 
     override fun onBackPressed() = finish()
+
+    override fun onDestroy() {
+        loading?.close()
+        loading = null
+        super.onDestroy()
+    }
 
 }

@@ -9,16 +9,15 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.flowWithLifecycle
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import me.syahdilla.putra.sholeh.storyappdicoding.R
-import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ActivitySignupBinding
-import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
-import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
-import me.syahdilla.putra.sholeh.storyappdicoding.ui.dialog.LoadingDialog
-import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.DefaultEvent
 import me.syahdilla.putra.sholeh.story.core.utils.EspressoIdlingResource
 import me.syahdilla.putra.sholeh.story.core.utils.animateFade
 import me.syahdilla.putra.sholeh.story.core.utils.animateInfinite
-import org.koin.android.ext.android.inject
+import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
+import me.syahdilla.putra.sholeh.storyappdicoding.R
+import me.syahdilla.putra.sholeh.storyappdicoding.databinding.ActivitySignupBinding
+import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
+import me.syahdilla.putra.sholeh.storyappdicoding.ui.dialog.LoadingDialog
+import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.DefaultEvent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val EMAIL_REGISTER_RESULT = "email_register_result"
@@ -27,7 +26,7 @@ const val PASSWORD_REGISTER_RESULT = "password_register_result"
 class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding::inflate) {
 
     private val viewModel: SignupViewModel by viewModel()
-    private val loading: LoadingDialog by inject()
+    private var loading: LoadingDialog? = null
 
     override suspend fun onInitialize(savedInstanceState: Bundle?) = with(binding) {
 
@@ -43,7 +42,10 @@ class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding:
 
         safeLaunch {
             viewModel.state.flowWithLifecycle(lifecycle).distinctUntilChanged().collectLatest {
-                if (it != DefaultEvent.InProgress) loading.close()
+                if (it != DefaultEvent.InProgress) {
+                    loading?.close()
+                    loading = null
+                }
                 when (it) {
                     is DefaultEvent.Failure -> Toast.makeText(mThis, it.message, Toast.LENGTH_SHORT).show()
                     DefaultEvent.Success -> {
@@ -55,7 +57,7 @@ class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding:
                         )
                         finish()
                     }
-                    DefaultEvent.InProgress -> loading.show(mThis)
+                    DefaultEvent.InProgress -> loading = LoadingDialog().show(mThis)
                     else -> {}
                 }
             }
@@ -86,6 +88,12 @@ class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding:
 
         banner.animateInfinite(lifecycle)
 
+    }
+
+    override fun onDestroy() {
+        loading?.close()
+        loading = null
+        super.onDestroy()
     }
 
 }

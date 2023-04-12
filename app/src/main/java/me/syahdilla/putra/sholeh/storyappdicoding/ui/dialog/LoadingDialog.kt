@@ -29,12 +29,13 @@ class LoadingDialog: DialogFragment(), DefaultLifecycleObserver {
     }
 
     fun close() = runCatching {
-        dismiss()
+        dismissNow()
     }
 
-    fun show(mActivity: AppCompatActivity) {
+    fun show(mActivity: AppCompatActivity): LoadingDialog {
         mActivity.lifecycle.addObserver(this)
         show(mActivity.supportFragmentManager, this::class.java.simpleName)
+        return this
     }
 
     override fun onDestroy(owner: LifecycleOwner) {

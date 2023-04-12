@@ -14,13 +14,6 @@ import androidx.lifecycle.flowWithLifecycle
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import me.syahdilla.putra.sholeh.story.core.utils.animateBounce
-import me.syahdilla.putra.sholeh.story.core.utils.animateChildViews
-import me.syahdilla.putra.sholeh.story.core.utils.animateFade
-import me.syahdilla.putra.sholeh.story.core.utils.animationsEnabled
-import me.syahdilla.putra.sholeh.story.core.utils.playSequentially
-import me.syahdilla.putra.sholeh.story.core.utils.safeLaunch
-import me.syahdilla.putra.sholeh.story.core.utils.safeRunOnce
 import me.syahdilla.putra.sholeh.story.core.utils.*
 import me.syahdilla.putra.sholeh.story.core.utils.image.CameraManager
 import me.syahdilla.putra.sholeh.story.core.utils.image.GalleryManager
@@ -30,7 +23,6 @@ import me.syahdilla.putra.sholeh.storyappdicoding.ui.activity.BaseActivity
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.dialog.LoadingDialog
 import me.syahdilla.putra.sholeh.storyappdicoding.ui.event.DefaultEvent
 import org.koin.android.ext.android.get
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.io.File
@@ -41,7 +33,7 @@ class AddStoryActivity: BaseActivity<ActivityAddStoryBinding>(ActivityAddStoryBi
     private val cameraManager: CameraManager = get { parametersOf(mThis) }
 
     private val viewModel: AddStoryViewModel by viewModel()
-    private val loading: LoadingDialog by inject()
+    private var loading: LoadingDialog? = null
 
     private val fusedLocationClient by lazy {
         LocationServices.getFusedLocationProviderClient(this)
@@ -57,7 +49,10 @@ class AddStoryActivity: BaseActivity<ActivityAddStoryBinding>(ActivityAddStoryBi
 
         safeLaunch {
             viewModel.state.flowWithLifecycle(lifecycle).distinctUntilChanged().collectLatest {
-                if (it != DefaultEvent.InProgress) loading.close()
+                if (it != DefaultEvent.InProgress) {
+                    loading?.close()
+                    loading = null
+                }
                 when(it) {
                     is DefaultEvent.Failure -> Toast.makeText(mThis, it.message, Toast.LENGTH_SHORT).show()
                     DefaultEvent.Success -> {
@@ -65,7 +60,7 @@ class AddStoryActivity: BaseActivity<ActivityAddStoryBinding>(ActivityAddStoryBi
                         setResult(RESULT_OK)
                         finish()
                     }
-                    DefaultEvent.InProgress -> loading.show(mThis)
+                    DefaultEvent.InProgress -> loading = LoadingDialog().show(mThis)
                     else -> {}
                 }
             }
@@ -185,5 +180,10 @@ class AddStoryActivity: BaseActivity<ActivityAddStoryBinding>(ActivityAddStoryBi
 
     private fun hasPermission() = Manifest.permission.ACCESS_COARSE_LOCATION.hasPermission()// && Manifest.permission.ACCESS_FINE_LOCATION.hasPermission()
 
+    override fun onDestroy() {
+        loading?.close()
+        loading = null
+        super.onDestroy()
+    }
 
 }

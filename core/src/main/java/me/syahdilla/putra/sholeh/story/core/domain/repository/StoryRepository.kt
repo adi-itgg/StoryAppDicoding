@@ -12,7 +12,7 @@ interface StoryRepository {
 
     suspend fun login(email: String, password: String): Result<User>
 
-    suspend fun register(name: String, email: String, password: String): Result<User>
+    suspend fun register(name: String, email: String, password: String): Result<Boolean>
 
     suspend fun getStories(token: String, withLocation: Boolean, page: Int?, size: Int?): Result<List<Story>>
     suspend fun getStories(user: User, withLocation: Boolean, page: Int? = null, size: Int? = null): Result<List<Story>> = getStories(user.token, withLocation, page, size)

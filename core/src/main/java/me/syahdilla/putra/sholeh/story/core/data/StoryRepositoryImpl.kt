@@ -60,7 +60,7 @@ class StoryRepositoryImpl(
             if (res.error) {
                 throw IllegalArgumentException(res.message)
             }
-            res.loginResult as User
+            true
         }
     }
 
