@@ -5,7 +5,7 @@ import org.koin.core.annotation.Factory
 
 
 @Factory
-internal class UserUseCaseImpl(
+class UserUseCaseImpl(
     private val repository: StoryRepository
 ): UserUseCase {
 

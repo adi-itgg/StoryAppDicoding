@@ -35,6 +35,7 @@ private const val androidEkspresso_version = "3.5.1"
 
 object Deps {
     // default dependency
+    private const val kotlinLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     private const val coreKTX = "androidx.core:core-ktx:$coreKTX_version"
     private const val appCompat = "androidx.appcompat:appcompat:$appCompat_version"
     private const val material = "com.google.android.material:material:$material_version"

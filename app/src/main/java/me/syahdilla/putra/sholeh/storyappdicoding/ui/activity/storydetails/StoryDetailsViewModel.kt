@@ -31,7 +31,7 @@ class StoryDetailsViewModel(
             return false
         }
         val favClazz: Any = Class.forName("me.syahdilla.putra.sholeh.favorit.di.FavModule").newInstance()
-        val field = favClazz.javaClass.getDeclaredField("module")
+        val field = favClazz.javaClass.getDeclaredField("modules")
         field.isAccessible = true
         val module: Module = field.get(favClazz) as Module
         loadKoinModules(module)
@@ -61,7 +61,9 @@ class StoryDetailsViewModel(
             return
         }
 
-        obj::class.memberFunctions.find { it.name == "addFavorite" }?.let {
+        obj::class.memberFunctions.find {
+            it.name == "addFavorite"
+        }?.let {
             it.isAccessible = true
             it.callSuspend(obj, story)
         }

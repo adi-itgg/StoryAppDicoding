@@ -166,6 +166,7 @@ class AddStoryActivity: BaseActivity<ActivityAddStoryBinding>(ActivityAddStoryBi
                         "Your location is not found. Try Again",
                         Toast.LENGTH_SHORT
                     ).show()
+                    binding.showLocation.isChecked = false
                     return@addOnSuccessListener
                 }
 

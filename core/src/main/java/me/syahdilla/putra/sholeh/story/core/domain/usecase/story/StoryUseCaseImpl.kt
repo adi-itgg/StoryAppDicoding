@@ -9,7 +9,7 @@ import java.io.File
 
 
 @Factory
-internal class StoryUseCaseImpl(
+class StoryUseCaseImpl(
     private val repository: StoryRepository
 ): StoryUseCase {
 

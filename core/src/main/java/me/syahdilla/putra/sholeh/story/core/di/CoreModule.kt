@@ -57,7 +57,7 @@ val coreModule = module {
     single {
         Room.databaseBuilder(androidContext(), StoryDatabaseImpl::class.java, "story-db")
             .fallbackToDestructiveMigration()
-            .openHelperFactory(get())
+            .openHelperFactory(get<SupportFactory>())
             .build()
     } bind StoryDatabase::class
 

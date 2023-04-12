@@ -26,7 +26,7 @@ class FavoriteActivity: BaseActivity<ActivityFavoriteBinding>(ActivityFavoriteBi
     override suspend fun onInitialize(savedInstanceState: Bundle?) = with (binding.root) {
         title = getString(R.string.title_favorit)
 
-        loadKoinModules(FavModule().module)
+        loadKoinModules(FavModule().modules)
 
         favAdapter = FavoriteAdapter()
         favAdapter.onItemClick = {

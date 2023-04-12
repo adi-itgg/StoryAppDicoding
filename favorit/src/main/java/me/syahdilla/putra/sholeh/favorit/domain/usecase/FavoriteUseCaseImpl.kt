@@ -1,12 +1,12 @@
 package me.syahdilla.putra.sholeh.favorit.domain.usecase
 
 import kotlinx.coroutines.flow.map
-import me.syahdilla.putra.sholeh.favorit.data.FavoriteRepositoryImpl
+import me.syahdilla.putra.sholeh.favorit.domain.repository.FavoriteRepository
 import me.syahdilla.putra.sholeh.story.core.domain.model.Story
 import me.syahdilla.putra.sholeh.story.core.utils.DataMapper
 
 class FavoriteUseCaseImpl(
-    private val repository: FavoriteRepositoryImpl
+    private val repository: FavoriteRepository
 ): FavoriteUseCase {
 
     override fun getFavorites() = repository.getFavorites().map { flow -> flow.map { entity -> DataMapper.mapEntityToDomain(entity) } }
